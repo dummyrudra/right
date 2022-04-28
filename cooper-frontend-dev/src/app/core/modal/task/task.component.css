@@ -1,0 +1,12 @@
+
+.activity-tab .ant-tabs-tab-btn{
+    font-size: .95rem!important;
+    padding: 0;
+    text-transform: capitalize;
+}
+.custom-class{
+    background-color: crimson;
+}
+.d-block.modal.fade.show{
+    background: rgba(0,0,0,0.4);
+}

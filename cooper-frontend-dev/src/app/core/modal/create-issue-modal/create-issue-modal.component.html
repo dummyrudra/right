@@ -1,0 +1,270 @@
+<ng-template #content let-modal class="modal-dialog modal-lg w-md-600px">
+   <div class="modal-header py-3">
+      <h5 class="modal-title mb-0">Create issue</h5>
+      <!--begin::Close-->
+      <!--end::Close-->
+   </div>
+   <div class="modal-body">
+      <form [formGroup]="form">
+         <div class="input-group mb-6 text-center">
+            <label class="w-100 text-uppercase fs-9 ls-1">Project Name</label>
+            <h3 class="fw-bolder w-100">{{selectedProject.name| titlecase}}</h3>
+         </div>
+         <div class="input-group mb-6">
+            <label class="w-100 w-100 mb-2">Issue Type</label>
+            <div class="position-relative w-100 btn-arrow-none" ngbDropdown>
+               <button type="button" class="btn btn-light text-start rounded w-100 fs-7 px-4 py-3 btn-dropdown"
+               ngbDropdownToggle>
+                  <img [src]="'../../../../assets/img/'+selectedIssue.icon" class="img-fluid" alt="img">
+                  {{selectedIssue.issue | titlecase}}
+                  <span class="float-end">
+                     <span class="svg-icon svg-icon-primary svg-icon mx-0">
+                        <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Navigation/Angle-down.svg-->
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                           width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                           <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                              <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                              <path
+                                 d="M6.70710678,15.7071068 C6.31658249,16.0976311 5.68341751,16.0976311 5.29289322,15.7071068 C4.90236893,15.3165825 4.90236893,14.6834175 5.29289322,14.2928932 L11.2928932,8.29289322 C11.6714722,7.91431428 12.2810586,7.90106866 12.6757246,8.26284586 L18.6757246,13.7628459 C19.0828436,14.1360383 19.1103465,14.7686056 18.7371541,15.1757246 C18.3639617,15.5828436 17.7313944,15.6103465 17.3242754,15.2371541 L12.0300757,10.3841378 L6.70710678,15.7071068 Z"
+                                 fill="#000000" fill-rule="nonzero"
+                                 transform="translate(12.000003, 11.999999) rotate(-180.000000) translate(-12.000003, -11.999999) ">
+                              </path>
+                           </g>
+                        </svg>
+                        <!--end::Svg Icon-->
+                     </span>
+                  </span>
+               </button>
+               <!--begin::Menu 2-->
+               <div
+                  class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary w-100 fw-bold py-3"
+                  ngbDropdownMenu>
+                  <!--begin::Menu item-->
+                  <div class="menu-item px-3" *ngFor="let item of issueTypeList">
+                     <a (click)="selectIssue(item)" class="menu-link px-3" *ngIf="selectedIssue?.issue!=item?.issue"
+                     ngbDropdownItem>
+                        <img [src]="'../../../../assets/img/'+item.icon" class="img-fluid w-15px me-3" alt="img">
+                        {{item.issue | titlecase}} </a>
+                  </div>
+                  <!-- <div class="menu-item px-3">
+                      <a href="#" class="menu-link px-3"> <img src="../../../../assets/img/b.svg" class="img-fluid w-15px me-3" alt="img"> Epic</a>
+                   </div>
+                   <div class="menu-item px-3">
+                      <a href="#" class="menu-link px-3"> <img src="../../../../assets/img/bugs.svg" class="img-fluid w-15px me-3" alt="img"> Bug</a>
+                   </div> -->
+               </div>
+            </div>
+         </div>
+         <div class="input-group mb-5">
+            <label class="w-100 w-100 mb-2">Summary</label>
+            <input type="text" class="form-control form-control-lg border-0 bg-light rounded " value=""
+               formControlName="summary">
+         </div>
+         <div class="input-group mb-5">
+            <label class="w-100 w-100 mb-2">Description</label>
+            <!-- <textarea class="form-control resize-none bg-light rounded fs-7 border-0 h-100px"
+               formControlName="description"></textarea> -->
+            <quill-editor class="content-editor form-control resize-none bg-light rounded fs-7 border-0 h-auto quill-editor-border-none"
+               [modules]="editorOptions" formControlName="description" [placeholder]="''"
+               (onEditorCreated)="editorCreated($event)" formControlName="description">
+            </quill-editor>
+         </div>
+         <div class="input-group mb-6">
+            <label class="w-100 w-100 mb-2">Assignee</label>
+            <div class="position-relative w-100 btn-arrow-none" ngbDropdown>
+               <button type="button" class="btn btn-light text-start rounded w-100 fs-7 px-4 py-3 btn-dropdown"
+               ngbDropdownToggle>
+                  {{selectedUser.fullName |titlecase}}
+                  <span class="float-end">
+                     <span class="svg-icon svg-icon-primary svg-icon mx-0">
+                        <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Navigation/Angle-down.svg-->
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                           width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                           <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                              <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                              <path
+                                 d="M6.70710678,15.7071068 C6.31658249,16.0976311 5.68341751,16.0976311 5.29289322,15.7071068 C4.90236893,15.3165825 4.90236893,14.6834175 5.29289322,14.2928932 L11.2928932,8.29289322 C11.6714722,7.91431428 12.2810586,7.90106866 12.6757246,8.26284586 L18.6757246,13.7628459 C19.0828436,14.1360383 19.1103465,14.7686056 18.7371541,15.1757246 C18.3639617,15.5828436 17.7313944,15.6103465 17.3242754,15.2371541 L12.0300757,10.3841378 L6.70710678,15.7071068 Z"
+                                 fill="#000000" fill-rule="nonzero"
+                                 transform="translate(12.000003, 11.999999) rotate(-180.000000) translate(-12.000003, -11.999999) ">
+                              </path>
+                           </g>
+                        </svg>
+                        <!--end::Svg Icon-->
+                     </span>
+                  </span>
+               </button>
+               <!--begin::Menu 2-->
+               <div
+                  class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary w-100 fw-bold py-3"
+                  ngbDropdownMenu>
+                  <!--begin::Menu item-->
+                  <!-- <div class="menu-item px-3">
+                      <a href="#" class="menu-link px-3">
+                         <div class="user-profile rounded-circle me-3 bg-warning w-30px h-30px d-flex align-items-center justify-content-center fs-7">
+                            <img src="img/g.png" class="img-fluid rounded-circle" alt="user">
+                         </div>
+                         Gaurav Aery
+                      </a>
+                   </div> -->
+                  <div class="menu-item px-3"><input type="text" class="form-control" placeholder="Search"
+                        (keyup)="search($event,'user')"></div>
+                  <div style="overflow: scroll;max-height: 200px;">
+                     <div class="menu-item px-3" *ngIf="userList.length<2 || tempUserList.length<1">
+                        No Result
+                     </div>
+                     <div class="menu-item px-3" *ngFor="let item of tempUserList">
+                        <a (click)="selectUser(item)" class="menu-link px-3"
+                           *ngIf="selectedUser.fullName!=item.fullName" ngbDropdownItem>
+                           <div *ngIf="!item?.avatar"
+                              class="user-profile rounded-circle me-3 bg-warning w-30px h-30px d-flex align-items-center justify-content-center fs-7">
+                              {{item.fullName[0] | uppercase}}
+                           </div>
+                           <div *ngIf="item?.avatar"
+                              class="user-profile rounded-circle me-2 bg-warning w-30px h-30px d-flex align-items-center justify-content-center fs-7">
+                              <img [src]="userAvatar+item?.avatar" class="img-fluid rounded-circle"
+                                 alt="user">
+                           </div>
+                           {{item.fullName | titlecase}}
+                        </a>
+                     </div>
+                  </div>
+
+                  <!-- <div class="menu-item px-3">
+                      <a href="#" class="menu-link px-3">
+                         <div class="user-profile rounded-circle me-3 bg-info text-white w-30px h-30px d-flex align-items-center justify-content-center fs-9">
+                            N
+                         </div>
+                         Navneel Bhanot  
+                      </a>
+                   </div> -->
+               </div>
+            </div>
+         </div>
+         <div class="input-group mb-5">
+            <label class="w-100 w-100 mb-2">Labels</label>
+            <div class="position-relative w-100 btn-arrow-none w-100">
+            <ng-select [items]="lebals" [addTag]="addTagFn" [hideSelected]="true" [multiple]="true"
+               [clearable]="false" (change)="setLabel($event)" formControlName="labels" class="w-100">
+            </ng-select>
+            <div  class="float-end position-absolute arrow-dropdown">
+               <span class="svg-icon svg-icon-light svg-icon mx-0">
+                  <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Navigation/Angle-down.svg-->
+                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                     width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                        <path
+                           d="M6.70710678,15.7071068 C6.31658249,16.0976311 5.68341751,16.0976311 5.29289322,15.7071068 C4.90236893,15.3165825 4.90236893,14.6834175 5.29289322,14.2928932 L11.2928932,8.29289322 C11.6714722,7.91431428 12.2810586,7.90106866 12.6757246,8.26284586 L18.6757246,13.7628459 C19.0828436,14.1360383 19.1103465,14.7686056 18.7371541,15.1757246 C18.3639617,15.5828436 17.7313944,15.6103465 17.3242754,15.2371541 L12.0300757,10.3841378 L6.70710678,15.7071068 Z"
+                           fill="#000000" fill-rule="nonzero"
+                           transform="translate(12.000003, 11.999999) rotate(-180.000000) translate(-12.000003, -11.999999) ">
+                        </path>
+                     </g>
+                  </svg>
+                  <!--end::Svg Icon-->
+               </span>
+            </div>
+            </div>
+            <!-- <input type="text" class="form-control border-0 bg-light  rounded fs-7" (change)="setLabel($event)"> -->
+         </div>
+         <div class="input-group mb-5">
+            <label class="w-100 w-100 mb-2">Sprint</label>
+            <div class="position-relative btn-arrow-none w-100" ngbDropdown #myDrop="ngbDropdown">
+               <button type="button" class="btn btn-light text-start rounded w-100 fs-7 px-4 py-3 btn-dropdown"
+                  id="dropdownBasic1" ngbDropdownToggle>
+                  {{selectedSprint?.name}}
+                  <span class="float-end" *ngIf="form.get('sprint')?.value">
+                     <span class="svg-icon svg-icon-primary svg-icon mx-0">
+                        <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Navigation/Angle-down.svg-->
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                           width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                           <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                              <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                              <path
+                                 d="M6.70710678,15.7071068 C6.31658249,16.0976311 5.68341751,16.0976311 5.29289322,15.7071068 C4.90236893,15.3165825 4.90236893,14.6834175 5.29289322,14.2928932 L11.2928932,8.29289322 C11.6714722,7.91431428 12.2810586,7.90106866 12.6757246,8.26284586 L18.6757246,13.7628459 C19.0828436,14.1360383 19.1103465,14.7686056 18.7371541,15.1757246 C18.3639617,15.5828436 17.7313944,15.6103465 17.3242754,15.2371541 L12.0300757,10.3841378 L6.70710678,15.7071068 Z"
+                                 fill="#000000" fill-rule="nonzero"
+                                 transform="translate(12.000003, 11.999999) rotate(-180.000000) translate(-12.000003, -11.999999) ">
+                              </path>
+                           </g>
+                        </svg>
+                        <!--end::Svg Icon-->
+                     </span>
+                  </span>
+               </button>
+               <!--begin::Menu 2-->
+               <div
+                  class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold py-3"
+                  ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <!--begin::Menu item-->
+                  <div class="menu-item px-3">
+                     <input type="text" class="form-control" placeholder="Search" (keyup)="search($event,'sprint')">
+                  </div>
+                  <div style="overflow: scroll;max-height: 200px;">
+                     <div class="menu-item px-3" *ngIf="tempSprintList.length<2">
+                        No Data
+                     </div>
+                     <div class="menu-item px-3" *ngFor="let item of tempSprintList" ngbDropdownItem>
+                        <a (click)="selectSprint(item)" class="menu-link px-3"
+                           *ngIf="selectedSprint?.name!=item.sprintName">{{item.sprintName}}</a>
+                     </div>
+                  </div>
+                  <!-- <div class="menu-item px-3">
+                       <a href="#" class="menu-link px-3"> <img src="img/insight.svg" alt="4-sight" class="img-fluid w-20px me-3"> 4Sight Analytic </a>
+                    </div>
+                    <div class="menu-item px-3">
+                       <a href="#" class="menu-link px-3"> <img src="img/air.svg" alt="4-sight" class="img-fluid w-20px me-3"> Air C Hub</a>
+                    </div>
+                    <div class="menu-item px-3">
+                       <a href="#" class="menu-link px-3"> <img src="img/hub.svg" alt="4-sight" class="img-fluid w-20px me-3"> Air Conditioning Hub</a>
+                    </div> -->
+               </div>
+            </div>
+         </div>
+         <div class="input-group mb-5">
+            <label class="w-100 w-100 mb-2">Story point estimate</label>
+            <input type="number" class="form-control form-control-lg border-0 bg-light rounded fs-7" value=""
+               formControlName="storyPointEstimate">
+         </div>
+         <div class="input-group mb-6">
+            <label class="w-100 w-100 mb-2">Attachment</label>
+                     <div class="custom-file position-relative cursor-pointer ">
+                        <input type="file" class="custom-file-input w-100 " id="customFile1" 
+                        (change)="selectFile($event)" #file
+                           multiple>
+                        <label class="custom-file-label border-0 rounded" for="customFile1" id="kt_tagify_1">
+                           Upload attachments
+                        </label>
+                        
+                     </div>
+                     <div class="w-100 d-flex flex-wrap">
+                     <div class="fv-plugins-message-container mt-3 me-3" *ngFor="let item of files">
+                        <div class="bg-light-primary border rounded fw-bolder fs-8 p-2 position-relative">
+                           {{item.name}}
+                     
+                           <div class="position-absolute end-0 remove-attach top-0">
+                                
+                                    <span class="svg-icon svg-icon-primary svg-icon-6x" (click)="deleteFile(item.name)">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                           <rect x="0" y="0" width="24" height="24"/>
+                                           <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10"/>
+                                           <path d="M12.0355339,10.6213203 L14.863961,7.79289322 C15.2544853,7.40236893 15.8876503,7.40236893 16.2781746,7.79289322 C16.6686989,8.18341751 16.6686989,8.81658249 16.2781746,9.20710678 L13.4497475,12.0355339 L16.2781746,14.863961 C16.6686989,15.2544853 16.6686989,15.8876503 16.2781746,16.2781746 C15.8876503,16.6686989 15.2544853,16.6686989 14.863961,16.2781746 L12.0355339,13.4497475 L9.20710678,16.2781746 C8.81658249,16.6686989 8.18341751,16.6686989 7.79289322,16.2781746 C7.40236893,15.8876503 7.40236893,15.2544853 7.79289322,14.863961 L10.6213203,12.0355339 L7.79289322,9.20710678 C7.40236893,8.81658249 7.40236893,8.18341751 7.79289322,7.79289322 C8.18341751,7.40236893 8.81658249,7.40236893 9.20710678,7.79289322 L12.0355339,10.6213203 Z" fill="#000000"/>
+                                       </g>
+                                   </svg></span>
+
+
+                           </div>
+                           </div>
+                     </div>
+                  </div>
+         </div>
+         <div class="modal-footer px-0 pb-0 border-0">
+            <button type="button" class="btn btn-light btn-sm" (click)="modal.dismiss('Cross click')">Cancel</button>
+            <button type="button" class="btn btn-primary btn-sm" (click)="onSubmit()" [disabled]="!form?.valid">Create</button>
+         </div>
+      </form>
+   </div>
+</ng-template>
+
+<!-- <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button> -->
+
+<notifier-container></notifier-container>

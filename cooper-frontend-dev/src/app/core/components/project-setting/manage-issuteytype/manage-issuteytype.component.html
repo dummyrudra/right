@@ -1,0 +1,100 @@
+<button class="accordion-button border-0 collapsed rounded btn nav-link  py-4 px-5  d-md-none" type="button"  data-bs-toggle="collapse" data-bs-target="#acc-email" aria-expanded="true" aria-controls="acc-email">
+    <span class="d-flex flex-column align-items-start">
+       <span class="fs-5 fw-normal d-flex align-items-center">
+          <span class="svg-icon  me-4 svg-icon-1">
+             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                   <rect x="0" y="0" width="24" height="24"/>
+                   <path d="M5,6 L19,6 C20.1045695,6 21,6.8954305 21,8 L21,17 C21,18.1045695 20.1045695,19 19,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,8 C3,6.8954305 3.8954305,6 5,6 Z M18.1444251,7.83964668 L12,11.1481833 L5.85557487,7.83964668 C5.4908718,7.6432681 5.03602525,7.77972206 4.83964668,8.14442513 C4.6432681,8.5091282 4.77972206,8.96397475 5.14442513,9.16035332 L11.6444251,12.6603533 C11.8664074,12.7798822 12.1335926,12.7798822 12.3555749,12.6603533 L18.8555749,9.16035332 C19.2202779,8.96397475 19.3567319,8.5091282 19.1603533,8.14442513 C18.9639747,7.77972206 18.5091282,7.6432681 18.1444251,7.83964668 Z" fill="#000000"/>
+                </g>
+             </svg>
+          </span>
+          IssueType
+       </span>
+    </span>
+ </button>
+ <div class="card accordion-body accordion-collapse collapse p-0 mx-0" data-bs-parent="#acc-email-tab" aria-labelledby="acc-email" id="acc-email" >
+    <div class="card-body p-md-9 p-6">
+       <div class="row">
+          <div class="col-lg-12 col-12">
+             <div class="mb-6">
+                
+                <div>
+                  <button nz-button nzSecondary (click)="showModal()">Create Issue Type</button>
+                
+                </div>
+               </div>
+             <div>
+
+             </div>
+             <div class="separator mb-6"></div>
+             <!--begin::Alert-->
+            
+          </div>
+          
+       </div>
+      
+    </div>
+ </div>
+
+ <nz-modal
+ [(nzVisible)]="isVisible"
+ nzTitle="Create New Issue Type"
+
+ nzOkText="Ok"
+ nzCancelText="Cancel"
+ (nzOnOk)="handleOk()"
+ (nzOnCancel)="handleCancel()"
+>
+ <ng-container *nzModalContent>
+   <p class="text-danger">Not Implemented</p>
+  <form>
+      <div class="form-group">
+      <label>Issue Name</label>
+      <input class="form-control" placeholder="Enter Issue Name"/>
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <input class="form-control" placeholder="Enter Description"/>
+      </div>
+      <div class="form-group" *ngIf="ImageName">
+        <span >Icon: {{ImageName}}</span>
+        <img [src]="imgSrc" class="img-fluid rounded-circle w-100 h-100 object-fit-cover"> 
+      </div>
+      <div class="form-group mt-5 text-center">
+        
+        <button nz-button nzSecondary (click)="showModal1()">Add Icon</button>
+      
+      </div>
+  </form>
+ </ng-container>
+</nz-modal>
+
+
+
+<nz-modal
+ [(nzVisible)]="isVisible1"
+ nzTitle="Create New Issue Type"
+
+ nzOkText="Ok"
+ nzCancelText="Cancel"
+ (nzOnOk)="handleOk1()"
+ (nzOnCancel)="handleCancel1()"
+>
+ <ng-container *nzModalContent>
+   <p class="text-danger">Not Implemented</p>
+  <form>
+    <div class="row justify-content-center">
+        <label class="hoverable profile-input p-0 m-0" for="fileInput">
+            <img [src]="imgSrc?imgSrc:default" class="img-fluid rounded-circle w-100 h-100 object-fit-cover"> 
+            <div class="hover-text">Choose file</div>
+            <div class="background"></div>
+          </label>
+          <br/>
+          <input id="fileInput" type='file' (change)="readURL($event);">
+       
+    </div>
+  
+  </form>
+ </ng-container>
+</nz-modal>

@@ -1,0 +1,81 @@
+/* .dropdown-custom {
+    position: relative;
+    display: inline-block;
+  }
+  .dropdown-custom > input[type="checkbox"] {
+    position: absolute;
+    left: -100vw;
+  }
+  
+  .dropdown-custom > label,
+  .dropdown-custom > a[role="button"] {
+      display: inline-block;
+      padding: 6px 15px;
+      color: #333;
+      line-height: 1.5em;
+      text-decoration: none;
+      cursor: pointer;
+      border-radius: 3px;
+      background-color: #f5f8fa;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-content: center;
+      justify-content: center;
+  }
+  
+  
+  .dropdown-custom > ul {
+    position: absolute;
+    z-index: 999;
+    display: block;
+    left: -100vw;
+    top: calc(1.5em + 14px);
+    border: 1px solid #8c8c8c;
+    background: #fff;
+    padding: 6px 0;
+    margin: 0;
+    list-style: none;
+    width: 200px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 3px 8px rgba(0,0,0,.15);
+    -moz-box-shadow: 0 3px 8px rgba(0,0,0,.15);
+    box-shadow: 0 3px 8px rgba(0,0,0,.15);
+  }
+  
+  .dropdown-custom > ul a {
+    display: block;
+    padding: 6px 15px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  
+  .dropdown-custom > input[type="checkbox"]:checked ~ ul,
+  .dropdown-custom > ul:target {
+    left: 0;
+  }
+  
+  .dropdown-custom a.close {
+    display: none;
+  }
+  .dropdown-custom > ul:target ~ a.close {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    text-indent: -100vw;
+    z-index: 1000;
+  }
+
+   */
+
+   .pName:hover{
+    color: #009ef7 !important;
+   }
+
+   

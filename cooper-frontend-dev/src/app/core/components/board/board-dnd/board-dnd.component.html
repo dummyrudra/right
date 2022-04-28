@@ -1,0 +1,207 @@
+<div class="board">
+  <div class="board-wrapper">
+    <div class="board-columns" cdkDropListGroup>
+      <div class="overflow-auto overflow-hidden-y d-flex flex-column-reverse" cdkScrollable>
+       
+                <!--when there is no data -->
+                <div class="no-sprint-sec w-100 text-center pb-10 position-sticky start-0"  *ngIf="!isStart">
+                      <div class="mw-500px mx-auto" >
+                        <span class="svg-icon svg-icon-primary svg-icon-5x " style="
+                        font-size: 30px;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                            <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                            <path d="M8.63657261,15.4632487 C7.65328954,14.8436137 7,13.7480988 7,12.5 C7,10.5670034 8.56700338,9 10.5,9 C12.263236,9 13.7219407,10.3038529 13.9645556,12 L15,12 C16.1045695,12 17,12.8954305 17,14 C17,15.1045695 16.1045695,16 15,16 L10,16 C9.47310652,16 8.99380073,15.7962529 8.63657261,15.4632487 Z" fill="#000000"></path>
+                        </g>
+                    </svg><!--end::Svg Icon--></span>
+                        <h3 class="mt-5"> You haven't started a sprint</h3>
+                        <p class="fs-6 text-muted">You can't do anything on your Board because you haven't started a sprint yet.Go to baccklog to plan and start a  sprint</p>
+                          <a href="#" class="btn btn-sm btn-primary">
+                            Go to backlog
+                            </a>
+                      </div>
+                </div>
+             <!--when there is no data -->
+             <div class="d-flex w-100 h-100">
+          <div class="board-column  pe-3 h-auto"  *ngFor="let column of board; let i = index">
+            <div class="w-250px pb-10 h-100">
+                    <div *ngIf="showboard" class="action-on-hover column-title bg-white">
+                      <div class="card bg-light  position-relative  h-100">
+                        <div *ngIf="!isToggled[i] &&  column?.listName!=undefined" class="card-on-hover board-action py-4 position-absolute top-0">
+                          <div ngbDropdown class="delete-task" container="body">
+                            <span ngbDropdownToggle class="cursor-pointer px-2 menu-dropdown">
+                              <!--begin::Svg Icon | path: icons/duotune/general/gen052.svg-->
+                              <span class="svg-icon svg-icon-5 svg-icon-light m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                  <rect x="10" y="10" width="4" height="4" rx="2" fill="black"></rect>
+                                  <rect x="17" y="10" width="4" height="4" rx="2" fill="black"></rect>
+                                  <rect x="3" y="10" width="4" height="4" rx="2" fill="black"></rect>
+                                </svg>
+                              </span>
+                              <!--end::Svg Icon-->
+                            </span>
+                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-150px py-3" ngbDropdownMenu>
+                              <!--begin::Menu item-->
+                              <!-- <div class="menu-item px-1"><a class="menu-link px-3" ngbDropdownItem>Edit</a></div> -->
+                              <div class="menu-item px-2">
+                                <div class="menu-content  text-dark fw-bolder px-3 pt-0 pb-2">Action</div>
+                                <div class="separator mb-2 opacity-75"></div>
+                                <a class="menu-link px-3" ngbDropdownItem (click)="showConfirm(column,'list')">Delete</a>
+                              </div>
+                              <!--end::Menu item-->
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <h5 *ngIf="!isToggled[i] && column?.listName!=undefined" (click)="Toggle(column?.listName,i)" class="border-3 border-transparent border-solid 
+                                        fw-bolder p-4 my-0 fw-normal text-truncate w-100 pe-8 text-capitalize">{{
+                      column?.listName }}
+                      <span class="small" *ngIf="column?.tasks?.length==1">( {{column?.tasks?.length}} Issue )</span>
+                      <span class="small" *ngIf="column?.tasks?.length>1">( {{column?.tasks?.length}} Issues )</span>
+                    </h5>
+                    <div id="latest">
+                      <div class="d-flex rounded pe-2 align-items-center border bg-white "
+                        *ngIf="isToggled[i]   && listName==column?.listName || column?.listName==undefined ">
+                        <form [formGroup]="Form" class="w-100">
+                          <input [ngClass]="{
+                                          'is-invalid':
+                                            Form.controls['listName'].touched &&
+                                            Form.controls['listName'].errors
+                                        }" autofocus
+                            class="form-control latest p-4 h-auto border-0 min-h-0  rounded-1  bg-white"
+                            formControlName="listName" (keyup)="handleKey($event,i,column)" />
+                        </form>
+                        <div class="icons-profile bg-body-rounded ms-auto w-45px d-flex">
+                          <i class="bi bi-check  d-inline-block fs-1  cursor-pointer fw-bold text-success"
+                            (click)="handleSave(i,column)"></i>
+                          <i class="bi bi-x d-inline-block  fs-1  cursor-pointer fw-bold text-danger"
+                            (click)="column?.listName==undefined?cancel(i):cancelOk(i)"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="showboard && isStart" id="{{column._id}}"
+                class="tasks-container min-h-100px bg-light rounded p-2 mt-5 task-detail-cards" cdkDropList
+                [cdkDropListData]="column?.tasks" (cdkDropListDropped)="drop($event)" >
+                <div class="task bg-white p-4 rounded-1  mb-3 action-on-hover bg-hover-secondary position-relative"
+                  *ngFor="let item of column?.tasks" cdkDrag id="{{item._id}}" >
+                  <div class="w-20px h-20px position-absolute fs-7 board-action">
+                    <div ngbDropdown class="delete-task  " container="body">
+                      <span ngbDropdownToggle class="badge badge-secondary px-2 menu-dropdown">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen052.svg-->
+                        <span class="svg-icon svg-icon-5 m-0">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none">
+                            <rect x="10" y="10" width="4" height="4" rx="2" fill="black"></rect>
+                            <rect x="17" y="10" width="4" height="4" rx="2" fill="black"></rect>
+                            <rect x="3" y="10" width="4" height="4" rx="2" fill="black"></rect>
+                          </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                      </span>
+                      <div
+                        class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-150px py-4"
+                        ngbDropdownMenu>
+                        <p class="px-4 cursor-default">Action</p>
+                        <div class="menu-item px-1">
+                          <a (click)="showConfirm(item,'task')" class="menu-link px-3" ngbDropdownItem>Delete</a>
+                        </div>
+                        <div class="menu-item px-1">
+                          <a class="menu-link px-3" (click)="isFlag(item._id)" ngbDropdownItem>{{item.flag?'Remove
+                            flag':'Add flag'}}</a>
+                        </div>
+                        <div class="menu-item px-1">
+                          <a (click)="showLabelModal(item)" class="menu-link px-3" ngbDropdownItem>Add labels</a>
+                        </div>
+                        <!-- <div class="menu-item px-1"><a (click)="flag(item2)" class="menu-link px-3" ngbDropdownItem>Share</a></div> -->
+                        <!--end::Menu item-->
+                      </div>
+                    </div>
+                  </div>
+
+                  <div (click)="openModal(item._id)">
+                    <div class="rounded-1 bg-hover-secondary mb-4">
+                      <div class="d-flex">
+                        <h6 class="fs-7 mb-0 text-break fw-normal  pe-8 ">{{ item?.summary }}</h6>
+                      </div>
+                    </div>
+                    <!-- for Epic -->
+                    <span *ngFor="let lb of item?.labels"
+                      class="badge badge-light-primary text-truncate mw-100 fw-nomal me-1 fs-9 text-uppercase rounded-1">{{lb}}</span>
+                    <div class="d-flex w-100 align-items-center mt-5">
+                      <div class="d-flex align-items-center w-100 min-h-30px">
+                        <div class="d-flex align-items-center">
+                          <img *ngIf="item?.issueType=='story'" src="assets/img/a.svg" class="img-fluid" alt="img" />
+                          <img *ngIf="item?.issueType=='task'" src="assets/img/tick.svg" class="img-fluid" alt="img" />
+                          <img *ngIf="item?.issueType=='epic'" src="assets/img/b.svg" class="img-fluid" alt="img" />
+                          <img *ngIf="item?.issueType=='bug'" src="assets/img/bugs.svg" class="img-fluid" alt="img" />
+                          <h6 class="fs-7 fw-normal text-muted mx-1 mb-0">{{Key}}-{{item?.SN}}</h6>
+                        </div>
+                        <div class="ms-auto d-flex align-items-center justify-content-end">
+                          <span class="badge  fw-nomal fs-9 text-uppercase rounded-1" *ngIf="item?.flag">
+                            <i class="bi bi-flag-fill" style="color: red;"></i>
+                          </span>
+                          <div *ngIf="item?.assigneeID && !item?.assigneeID?.avatar"
+                            class="user-profile rounded-circle text-uppercase ms-auto  w-20px h-20px d-flex align-items-center justify-content-center fs-9"
+                            [ngStyle]="{'background-color': stringToHslColor(item?.assigneeID?.fullName)}">
+                            {{item?.assigneeID?.fullName[0]}}{{item?.assigneeID?.fullName?.split('
+                            ')[1]?.[0]}}
+                          </div>
+                          <div>
+                            <img *ngIf="item?.assigneeID && item?.assigneeID?.avatar"
+                              [src]="baseUrl + item?.assigneeID?.avatar" alt="img"
+                              class="user-profile rounded-circle text-uppercase ms-auto  w-20px h-20px d-flex align-items-center justify-content-center fs-9" />
+                          </div>
+                          <!-- {{item?.assigneeID?.fullName[0]}}{{item?.assigneeID?.fullName?.split(' ')[1]?.[0]}} -->
+                        </div>
+                        <div>
+                        </div>
+                      </div>
+
+
+
+
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+
+            </div>
+          </div>
+          <div class=" w-30px h-30px w-lg-40px h-lg-40px" *ngIf="showboard">
+            <button nz-button *ngIf="showAdd" (click)="handleOk()"
+              class=" btn btn-icon btn-light btn-active-secondary w-30px h-30px">
+              <span class="svg-icon svg-icon-dark svg-icon-1">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                  height="24px" viewBox="0 0 24 24" version="1.1">
+                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <rect fill="#000000" x="4" y="11" width="16" height="2" rx="1" />
+                    <rect fill="#000000" opacity="0.3"
+                      transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) "
+                      x="4" y="11" width="16" height="2" rx="1" />
+                  </g>
+                </svg>
+              </span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <nz-modal [(nzVisible)]="isLabelVisible" nzTitle="Add Labels" nzOkText="Save" nzCancelText="cancel"
+    (nzOnCancel)="handleLabelCancel()" (nzOnOk)="handleLabelOk()" [nzOkDisabled]="!labelForm.valid"
+    [nzOkLoading]="isLabelOkLoading">
+    <div *nzModalContent class="nz-custom-modal">
+      <form [formGroup]="labelForm">
+        <label class="fw-bold fs-6 p-0 w-100  mb-2">Begin typing to create labels</label>
+        <ng-select [items]="Labels" [addTag]="addTagFn" [hideSelected]="true" [multiple]="true" addTagText="Add label"
+          [clearable]="false" formControlName="labels"> ></ng-select>
+      </form>
+    </div>
+  </nz-modal>

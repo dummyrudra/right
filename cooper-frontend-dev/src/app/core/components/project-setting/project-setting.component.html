@@ -1,0 +1,173 @@
+<div class="content d-flex flex-column flex-column-fluid p-md-0 " id="kt_content">
+    <div class="container-fluid setting-section m-md-0 p-md-0  mt-8">
+       <div class="row justify-content-center  m-md-0 p-md-0">
+          <div class="col-lg-12  m-md-0 p-md-0">
+             <div class="d-flex flex-column flex-md-row rounded ">
+                <ul class="nav nav-tabs nav-pills border-0 rounded position-static setting-tab-menu flex-row w-250px py-10 px-4 flex-md-column mb-3 mb-md-0 fs-6 d-none d-md-inline-flex">
+                  
+                  <li class="nav-item me-0 mb-md-6">
+                     <a [routerLink]="['/'+organisation+'/project/'+projectKey+'/backlog']" class="btn nav-link text-start text-primary fs-4 fw-bold py-4 px-5 ">
+                        <span class="svg-icon svg-icon-primary svg-icon-2x">
+                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                           <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                               <polygon points="0 0 24 0 24 24 0 24"/>
+                               <path d="M5.29288961,6.70710318 C4.90236532,6.31657888 4.90236532,5.68341391 5.29288961,5.29288961 C5.68341391,4.90236532 6.31657888,4.90236532 6.70710318,5.29288961 L12.7071032,11.2928896 C13.0856821,11.6714686 13.0989277,12.281055 12.7371505,12.675721 L7.23715054,18.675721 C6.86395813,19.08284 6.23139076,19.1103429 5.82427177,18.7371505 C5.41715278,18.3639581 5.38964985,17.7313908 5.76284226,17.3242718 L10.6158586,12.0300721 L5.29288961,6.70710318 Z" fill="#000000" fill-rule="nonzero" transform="translate(8.999997, 11.999999) scale(-1, 1) translate(-8.999997, -11.999999) "/>
+                               <path d="M10.7071009,15.7071068 C10.3165766,16.0976311 9.68341162,16.0976311 9.29288733,15.7071068 C8.90236304,15.3165825 8.90236304,14.6834175 9.29288733,14.2928932 L15.2928873,8.29289322 C15.6714663,7.91431428 16.2810527,7.90106866 16.6757187,8.26284586 L22.6757187,13.7628459 C23.0828377,14.1360383 23.1103407,14.7686056 22.7371482,15.1757246 C22.3639558,15.5828436 21.7313885,15.6103465 21.3242695,15.2371541 L16.0300699,10.3841378 L10.7071009,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(15.999997, 11.999999) scale(-1, 1) rotate(-270.000000) translate(-15.999997, -11.999999) "/>
+                           </g>
+                       </svg></span> Back to Project
+                     </a>
+                     </li>
+                  <li class="nav-item me-0 mb-md-6">
+                      <a class="btn nav-link active py-4 px-5 " data-bs-toggle="tab" href="#profile-visiblity">
+                         <span class="d-flex flex-column align-items-start">
+                            <span class="fs-5 fw-normal d-flex align-items-center text-start">
+                               <span class="svg-icon  me-4 svg-icon-1">
+                                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <polygon points="0 0 24 0 24 24 0 24"/>
+                                        <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                        <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero"/>
+                                     </g>
+                                  </svg>
+                               </span>
+                               Manage People
+                            </span>
+                         </span>
+                      </a>
+                   </li>
+                   <li class="nav-item me-0 mb-md-6">
+                      <a class="btn nav-link py-4 px-5 " data-bs-toggle="tab" href="#email">
+                         <span class="d-flex flex-column align-items-start">
+                            <span class="fs-5 fw-normal d-flex align-items-center text-start">
+                               <span class="svg-icon  me-4 svg-icon-1">
+                                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24"/>
+                                        <path d="M5,6 L19,6 C20.1045695,6 21,6.8954305 21,8 L21,17 C21,18.1045695 20.1045695,19 19,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,8 C3,6.8954305 3.8954305,6 5,6 Z M18.1444251,7.83964668 L12,11.1481833 L5.85557487,7.83964668 C5.4908718,7.6432681 5.03602525,7.77972206 4.83964668,8.14442513 C4.6432681,8.5091282 4.77972206,8.96397475 5.14442513,9.16035332 L11.6444251,12.6603533 C11.8664074,12.7798822 12.1335926,12.7798822 12.3555749,12.6603533 L18.8555749,9.16035332 C19.2202779,8.96397475 19.3567319,8.5091282 19.1603533,8.14442513 C18.9639747,7.77972206 18.5091282,7.6432681 18.1444251,7.83964668 Z" fill="#000000"/>
+                                     </g>
+                                  </svg>
+                               </span>
+                              IssueType
+                            </span>
+                         </span>
+                      </a>
+                   </li>
+                   <li class="nav-item me-0 mb-md-6">
+                      <a class="btn nav-link py-4 px-5 " data-bs-toggle="tab" href="#security">
+                         <span class="d-flex flex-column align-items-start">
+                            <span class="fs-5 fw-normal d-flex align-items-center text-start">
+                             
+                               <span _ngcontent-kyf-c216="" class="svg-icon me-4 svg-icon-1"><svg _ngcontent-kyf-c216="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g _ngcontent-kyf-c216="" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect _ngcontent-kyf-c216="" x="0" y="0" width="24" height="24"></rect><path _ngcontent-kyf-c216="" d="M10.5,5 L19.5,5 C20.3284271,5 21,5.67157288 21,6.5 C21,7.32842712 20.3284271,8 19.5,8 L10.5,8 C9.67157288,8 9,7.32842712 9,6.5 C9,5.67157288 9.67157288,5 10.5,5 Z M10.5,10 L19.5,10 C20.3284271,10 21,10.6715729 21,11.5 C21,12.3284271 20.3284271,13 19.5,13 L10.5,13 C9.67157288,13 9,12.3284271 9,11.5 C9,10.6715729 9.67157288,10 10.5,10 Z M10.5,15 L19.5,15 C20.3284271,15 21,15.6715729 21,16.5 C21,17.3284271 20.3284271,18 19.5,18 L10.5,18 C9.67157288,18 9,17.3284271 9,16.5 C9,15.6715729 9.67157288,15 10.5,15 Z" fill="#000000"></path><path _ngcontent-kyf-c216="" d="M5.5,8 C4.67157288,8 4,7.32842712 4,6.5 C4,5.67157288 4.67157288,5 5.5,5 C6.32842712,5 7,5.67157288 7,6.5 C7,7.32842712 6.32842712,8 5.5,8 Z M5.5,13 C4.67157288,13 4,12.3284271 4,11.5 C4,10.6715729 4.67157288,10 5.5,10 C6.32842712,10 7,10.6715729 7,11.5 C7,12.3284271 6.32842712,13 5.5,13 Z M5.5,18 C4.67157288,18 4,17.3284271 4,16.5 C4,15.6715729 4.67157288,15 5.5,15 C6.32842712,15 7,15.6715729 7,16.5 C7,17.3284271 6.32842712,18 5.5,18 Z" fill="#000000" opacity="0.3"></path></g></svg></span>
+                              Manage List
+                            </span>
+                         </span>
+                      </a>
+                   </li>
+                   <li class="nav-item me-0 mb-md-6">
+                      <a class="btn nav-link py-4 px-5 " data-bs-toggle="tab" href="#account-preference">
+                         <span class="d-flex flex-column align-items-start">
+                            <span class="fs-5 fw-normal d-flex align-items-center text-start">
+                               <span class="svg-icon  me-4 svg-icon-1">
+                                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24"/>
+                                        <path d="M7,3 L17,3 C19.209139,3 21,4.790861 21,7 C21,9.209139 19.209139,11 17,11 L7,11 C4.790861,11 3,9.209139 3,7 C3,4.790861 4.790861,3 7,3 Z M7,9 C8.1045695,9 9,8.1045695 9,7 C9,5.8954305 8.1045695,5 7,5 C5.8954305,5 5,5.8954305 5,7 C5,8.1045695 5.8954305,9 7,9 Z" fill="#000000"/>
+                                        <path d="M7,13 L17,13 C19.209139,13 21,14.790861 21,17 C21,19.209139 19.209139,21 17,21 L7,21 C4.790861,21 3,19.209139 3,17 C3,14.790861 4.790861,13 7,13 Z M17,19 C18.1045695,19 19,18.1045695 19,17 C19,15.8954305 18.1045695,15 17,15 C15.8954305,15 15,15.8954305 15,17 C15,18.1045695 15.8954305,19 17,19 Z" fill="#000000" opacity="0.3"/>
+                                     </g>
+                                  </svg>
+                               </span>
+                               Account Preferences 
+                            </span>
+                         </span>
+                      </a>
+                   </li>
+                </ul>
+
+                <div class="setting-tab-details pe-md-4">
+                   <div class="tab-content accordion overflow-auto h-100" id="myTabContent">
+                      <div class="tab-pane fade border-0 show active accordion-item mb-md-0 mb-5" id="profile-visiblity" role="tabpanel">
+                       <app-manage-people [projectRoles]="projectRoles" [projectId]="projectId" ></app-manage-people>
+                      </div>
+                      <div class="tab-pane fade border-0 accordion-item mb-md-0 mb-5" id="email" role="tabpanel">
+                       <app-manage-issuetype></app-manage-issuetype>
+                      </div>
+                      <div class="tab-pane fade mb-md-0 mb-5 border-0" id="security" role="tabpanel">
+                     
+                        <app-manage-list  [projectId]="projectId"></app-manage-list>
+                      </div>
+                      <div class="tab-pane fade border-0 accordion-item mb-md-0 mb-5" id="account-preference" role="tabpanel">
+                         <button class="accordion-button border-0 collapsed rounded btn nav-link  py-4 px-5  d-md-none" type="button"  data-bs-toggle="collapse" data-bs-target="#acc-accordion" aria-expanded="true" aria-controls="acc-accordion">
+                            <span class="d-flex flex-column align-items-start">
+                               <span class="fs-5 fw-normal d-flex align-items-center text-start">
+                                  <span class="svg-icon  me-4 svg-icon-1">
+                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                           <rect x="0" y="0" width="24" height="24"/>
+                                           <path d="M7,3 L17,3 C19.209139,3 21,4.790861 21,7 C21,9.209139 19.209139,11 17,11 L7,11 C4.790861,11 3,9.209139 3,7 C3,4.790861 4.790861,3 7,3 Z M7,9 C8.1045695,9 9,8.1045695 9,7 C9,5.8954305 8.1045695,5 7,5 C5.8954305,5 5,5.8954305 5,7 C5,8.1045695 5.8954305,9 7,9 Z" fill="#000000"/>
+                                           <path d="M7,13 L17,13 C19.209139,13 21,14.790861 21,17 C21,19.209139 19.209139,21 17,21 L7,21 C4.790861,21 3,19.209139 3,17 C3,14.790861 4.790861,13 7,13 Z M17,19 C18.1045695,19 19,18.1045695 19,17 C19,15.8954305 18.1045695,15 17,15 C15.8954305,15 15,15.8954305 15,17 C15,18.1045695 15.8954305,19 17,19 Z" fill="#000000" opacity="0.3"/>
+                                        </g>
+                                     </svg>
+                                  </span>
+                                  Account Preferences 
+                               </span>
+                            </span>
+                         </button>
+                         <div class="card accordion-body accordion-collapse p-0 m-0 collapse" data-bs-parent="#acc-accordion-tabs" aria-labelledby="acc-accordion" id="acc-accordion">
+                            <div class="card-body p-md-9 p-6">
+                               <div class="row">
+                                  <div class="col-lg-12 col-12">
+                                     <div class="mb-6">
+                                        <h2>Account Preferences</h2>
+                                        <p>Control settings related to your account.</p>
+                                     </div>
+                                     <div class="separator mb-6"></div>
+                                     <div class="mt-8">
+                                        <h5>Language & Region</h5>
+                                        <p>Changes to your language and timezone will be reflected across Confluence, Jira and directory. Update your language and timezone for other products from your product settings.</p>
+                                     </div>
+                                  </div>
+
+                                  <div class="col-lg-6 col-12">
+                                     <div class="form-group mb-6 mt-4">
+                                        <label class="fw-bold fs-6 mb-2">Time Zone</label>
+                                        <select aria-label="time" data-control="select2" data-placeholder="Time Zone" class="form-select form-select-solid form-control-lg fw-normal fs-7">
+                                           <option value="0">UTC</option>
+                                           <option value="1">GMT</option>
+                                        </select>
+                                     </div>
+                                  </div>
+                                  <div class="col-lg-6 col-12">
+                                     <div class="form-group mb-6 mt-4">
+                                        <label class="fw-bold fs-6 mb-2">Language</label>
+                                        <select aria-label="language" data-control="select2" data-placeholder="Language" class="form-select form-select-solid fw-normal form-control-lg fs-7">
+                                           <option value="0">Arabic</option>
+                                           <option value="1">Dutch</option>
+                                           <option value="2">English</option>
+                                           <option value="3">French</option>
+                                        </select>
+                                     </div>
+                                  </div>
+
+                                  <div class="col-lg-12 col-12">
+                                     <form>
+                                        <h5>Delete your account</h5>
+                                        <p>When you delete your account, you lose access to Atlassian account services, and we permanently delete your personal data. You can cancel the deletion within 14 days.</p>
+                                     </form>
+                                  </div>
+                                  
+                                  <div class="col-lg-8 col-12">
+                                     <button type="submit" class="btn btn-danger">Delete</button>
+                                  </div>
+
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             
+          </div>
+       </div>
+    </div>
+ </div>

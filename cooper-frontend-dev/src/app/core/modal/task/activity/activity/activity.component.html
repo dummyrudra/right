@@ -1,0 +1,277 @@
+<div class="activity-tab">
+    <nz-tabset nzType="card">
+      <nz-tab *ngFor="let tab of tabs" [nzTitle]="tab">
+        <div
+          *ngIf="tab == 'all' "
+          class="tab-pane"
+          id="all"
+          role="tabpanel"
+        >
+        <div >
+          <div class="" *ngFor="let item of allData">
+
+            <div
+              *ngIf="!item?.user?.avatar ||item?.user?.avatar == null || item?.user?.avatar == ''"
+              class="d-flex flex-start create-issue mb-5"
+            >
+              <div
+                class="user-profile rounded-circle text-uppercase bg-info text-white w-30px h-30px d-flex align-items-center justify-content-center fs-9"
+              >
+                {{ item?.user?.fullName |namePipe:item?.user?.fullName
+                }}
+              </div>
+
+              <div class="ps-3 user-activity-detail">
+                <b class="">{{ item?.user?.fullName }}</b>
+                <span class="" [innerHTML]="item?.message">
+                  </span
+                > <b> {{item?.activityField}}</b>
+                <div class="w-100">
+                  <small
+                    >on {{ item?.date | date: "medium" }}</small
+                  >
+                  <p
+                    class="badge badge-secondary ms-2 text-uppercase fs-9 mb-0 mt-2"
+                  >
+                    {{ item?.activityType }}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              *ngIf="item?.user?.avatar"
+              class="d-flex flex-start update-sprint mb-5"
+            >
+              <div
+                class="user-profile rounded-circle w-30px h-30px"
+              >
+                <img
+                *ngIf="item?.user?.avatar"
+                  [src]="baseUrl + item?.user?.avatar"
+                  alt="img"
+                  class="img-fluid rounded-circle"
+                />
+                <div  class="img-fluid rounded-circle" *ngIf="!item?.user?.avatar">
+                    <span [ngStyle]="{'background-color':stringToHslColor(item?.user?.fullName)}">
+                      {{item?.user?.fullName |namePipe:item?.user?.fullName}}
+                    </span>
+                </div>
+              </div>
+
+              <div class="ps-3 user-activity-detail" >
+                <b class="">{{ item?.user?.fullName }} </b>
+                <span class="" [innerHTML]="item?.message">
+                  </span> <b> {{item?.activityField}}</b>
+                <div class="w-100">
+                  <!-- <small>changed the Assignee</small> -->
+                  <small class="fw-bold text-muted">
+                    on {{ item?.date | date: "medium" }}</small
+                  >
+                  <p
+                    class="badge badge-secondary text-uppercase ms-2 fs-9 mb-0 mt-2"
+                  >
+                    {{ item?.activityType }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div
+          *ngIf="tab == 'comment'"
+          class="tab-pane"
+          id="comment"
+          role="tabpanel"
+        >
+          <div [formGroup]="form2" class="update-sprint mb-5 flex-wrap">
+           
+            <ng-container class="d-none add-textarea ms-3" *ngIf="isComment; else readonlyModeTmpl">
+              <!-- <input
+              type="text"
+              formControlName="comment"
+              class="form-control  form-control-lg fs-7 w-100"
+              placeholder="Add a Comment..."
+            /> -->
+              <quill-editor
+                class="content-editor"
+                [modules]="modules"
+                formControlName="comment"
+                [placeholder]="''"
+                (onEditorCreated)="editorCreated1($event)"
+              >
+              </quill-editor>
+
+              <div
+              class="d-flex mt-4 mb-2"
+                
+              >
+                <button
+                  nz-button
+                  class="mr-2"
+                  (click)="saveComment()"
+                  nzType="primary"
+                >
+                  Save
+                </button>
+                <button nz-button nzSecondary (click)="cancelComment()">
+                  Cancel
+                </button>
+              </div>
+            </ng-container>
+
+            <ng-template #readonlyModeTmpl>
+              <div
+                class="ql-snow content-readonly row"
+                *ngIf="!isComment"
+                (click)="setEditModeComment()"
+              >
+               
+                <div class="icon-edit col-12">
+                  <input
+                  type="text"
+                  class="form-control form-control-solid form-control-lg fs-7 w-100"
+                  placeholder="Add a Comment..."
+                />
+                </div>
+              </div>
+            </ng-template>
+
+            <div  *ngFor="let it of comments"
+              
+            >
+            <div class="d-flex mt-5">
+                <div *ngIf="it?.user?.avatar" class="m-1 user-profile rounded-circle  text-white w-30px h-30px d-flex align-items-center justify-content-center fs-9">
+                  <img
+                  [src]="baseUrl + it?.user?.avatar"
+                  alt="img"
+                  class="img-fluid rounded-circle"
+                />
+                </div>
+                <div *ngIf="!it?.user?.avatar " class=" m-1 user-profile rounded-circle  text-white w-30px h-30px d-flex align-items-center justify-content-center fs-9">
+                  {{ it?.user?.fullName |namePipe:it?.user?.fullName}}
+                </div>
+                 <div class="user-activity-detail">
+                  <b class="">{{ it?.user?.fullName }}</b>
+                  <div [innerHTML]="it?.message"></div>
+                 <small class="fw-bold text-muted">
+                  on {{ it?.date | date: "medium" }}</small
+                >
+               
+          </div>
+          
+            </div>
+            
+            </div>
+            <!-- <div class=" add-comment-input ms-3">
+              <input
+                type="text"
+                class="form-control form-control-solid form-control-lg fs-7 w-100"
+                placeholder="Add a Comment..."
+              />
+            </div>
+            <div class="d-none add-textarea ms-3">
+              <textarea
+                name="kt-ckeditor-5"
+                rows="3"
+                id="kt-ckeditor-5"
+                class="form-control form-control-solid form-control-lg fs-7 w-100 resize-none"
+                placeholder="Add a Comment..."
+              >
+              </textarea>
+              <div class="d-flex mt-4">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-sm me-2"
+                >
+                  Save
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-light btn-sm cancel-btn"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div> -->
+          </div>
+        </div>
+        <div
+          *ngIf="tab == 'history'"
+          class="tab-pane "
+          id="history"
+          role="tabpanel"
+        >
+          <div *ngFor="let item of history">
+            <div
+              *ngIf="!item?.user?.avatar"
+              class="d-flex flex-start create-issue mb-5"
+            >
+            <!-- <img
+            *ngIf="item?.user?.avatar"
+              [src]="baseUrl + item?.user?.avatar"
+              alt="img"
+              class="img-fluid rounded-circle"
+            /> -->
+              <div
+              *ngIf="!item?.user?.avatar"
+                class="user-profile rounded-circle text-uppercase bg-info text-white w-30px h-30px d-flex align-items-center justify-content-center fs-9"
+              >
+                {{ item?.user?.fullName |namePipe:item?.user?.fullName }}
+              </div>
+
+              <div class="ps-3 user-activity-detail">
+                <b class="">{{ item?.user?.fullName }}</b>
+                <span class="">
+                  {{ item?.message }} <b>{{item?.activityField}}</b></span
+                >
+                <div class="w-100">
+                  <small
+                    >on {{ item?.date | date: "medium" }}</small
+                  >
+                  <!-- <p class="badge badge-secondary ms-2 fs-9 mb-0 mt-2">
+                                                      HISTORY</p> -->
+                </div>
+              </div>
+            </div>
+
+            <div
+              *ngIf="item?.user?.avatar"
+              class="d-flex flex-start update-sprint mb-5"
+            >
+              <div
+                class="user-profile rounded-circle w-30px h-30px"
+              >
+                <img
+                  [src]="baseUrl + item?.user?.avatar"
+                  alt="img"
+                  class="img-fluid rounded-circle"
+                />
+              </div>
+
+              <div class="ps-3 user-activity-detail">
+                <b class="">{{ item?.user?.fullName }} </b>
+                <span class="">
+                  {{ item?.message }} <b>{{item?.activityField}}</b>
+                  <!-- <b>Sprint (RI Sprint
+                                                      2)</b> -->
+                </span>
+                <div class="w-100">
+                  <!-- <small>changed the Assignee</small> -->
+                  <small class="fw-bold text-muted">
+                    on {{ item?.date | date: "medium" }}</small
+                  >
+                </div>
+              </div>
+            </div>
+
+  
+          </div>
+        </div>
+      </nz-tab>
+    </nz-tabset>
+ 
+  </div>
+
+<notifier-container></notifier-container>

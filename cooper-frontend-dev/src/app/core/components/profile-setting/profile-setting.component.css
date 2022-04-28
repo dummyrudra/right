@@ -1,0 +1,58 @@
+.icons-profile i{
+    cursor: pointer;
+}
+.is-invalid {
+    border: 1px solid red !important;
+    border-radius: 5px;
+}
+
+  .profile-input{
+      position: relative;
+    display: block;
+    cursor: pointer;
+    height: 200px;
+    width: 200px;
+    border: 1px solid #dbdbdb;
+    border-radius: 50%;
+    background: #f3f3f3;
+  }
+  .hoverable .hover-text{
+    position: absolute;
+    display: none;
+    top: 50%;
+    left:  50%;
+    transform: translate(-50%,-50%);   
+    z-index: 2;
+  }
+  .hoverable .background{
+    position: absolute;
+    display: none;
+    top: 0;
+    left:  0;
+    bottom: 0;
+    right: 0;
+    background-color:rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    border-radius: 50%;
+    z-index: 1;
+  }
+  .hoverable:hover .hover-text{
+    display: block;
+  }
+  .hoverable:hover .background{
+    display: block;
+  }
+
+#fileInput{
+    display: none;
+  }
+  .profile-edit-sec{
+    background: #2f9ef7;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

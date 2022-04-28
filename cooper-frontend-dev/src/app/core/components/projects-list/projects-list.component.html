@@ -1,0 +1,320 @@
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+   <div class="container-fluid">
+      <div class="card  min-height-inner-content pt-4 pb-0">
+         <!--begin::Header-->
+         <div class="card-header px-6   border-0 pb-0 mb-6 ">
+            <div class="d-lg-flex align-items-center w-100 justify-content-between flex-wrap flex-sm-nowrap">
+               <h1 class="text-dark  mb-0 fs-2 me-5 text-truncate w-250px">
+                  Projects
+               </h1>
+               <form [formGroup]="Form1" data-kt-search-element="form" autocomplete="off"
+                  class="d-sm-flex align-items-center  mt-lg-0 mt-8">
+                  <div class="form-group d-flex align-items-center mb-sm-0 mb-5 me-sm-5 me-0 position-relative">
+                     <input type="hidden" />
+                     <span
+                        class="svg-icon svg-icon-2 svg-icon-gray-700 position-absolute top-50 translate-middle-y ms-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                           <path
+                              d="M21.7 18.9L18.6 15.8C17.9 16.9 16.9 17.9 15.8 18.6L18.9 21.7C19.3 22.1 19.9 22.1 20.3 21.7L21.7 20.3C22.1 19.9 22.1 19.3 21.7 18.9Z"
+                              fill="black"></path>
+                           <path opacity="0.3"
+                              d="M11 20C6 20 2 16 2 11C2 6 6 2 11 2C16 2 20 6 20 11C20 16 16 20 11 20ZM11 4C7.1 4 4 7.1 4 11C4 14.9 7.1 18 11 18C14.9 18 18 14.9 18 11C18 7.1 14.9 4 11 4ZM8 11C8 9.3 9.3 8 11 8C11.6 8 12 7.6 12 7C12 6.4 11.6 6 11 6C8.2 6 6 8.2 6 11C6 11.6 6.4 12 7 12C7.6 12 8 11.6 8 11Z"
+                              fill="black"></path>
+                        </svg>
+                     </span>
+                     <input type="text" formControlName="searchItem"
+                        class="form-control form-control-solid px-13 py-3 fs-7 form-control-lg" name="search" value=""
+                        placeholder="Quick Search" data-kt-search-element="input">
+                     <span class="position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-5"
+                        data-kt-search-element="spinner">
+                        <span class="spinner-border h-15px w-15px align-middle text-gray-400"></span>
+                     </span>
+                     <span
+                        class="btn btn-flush btn-active-color-primary position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-4"
+                        data-kt-search-element="clear">
+                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                        <span class="svg-icon svg-icon-2 svg-icon-lg-1 me-0">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                              fill="none">
+                              <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                 transform="rotate(-45 6 17.3137)" fill="black"></rect>
+                              <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)"
+                                 fill="black"></rect>
+                           </svg>
+                        </span>
+                     </span>
+                  </div>
+                  <div class="form-group mb-sm-0 mb-5 ">
+                     <ng-select class=" min-w-200px" placeholder="Not Implemented Yet" [items]="ProjectLead"
+                        [bindLabel]="'label'" [bindValue]="'id'" [searchable]="true" [multiple]="false"
+                        [clearable]="true"></ng-select>
+                     <!-- <select class="min-w-200px max-w-500px select2-selection--single form-select   fw-normal select2 select2-hidden-accessible form-control form-control-solid px-4 fs-7 form-control-lg py-3"
+                  multiple="" data-placeholder="All Type" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                  <option>Product Discovery</option>
+                  <option>Software</option>
+                  <option>Service Management</option>
+                  <option>Business</option>
+               </select> -->
+                  </div>
+                  <div class="form-group ms-5 mb-sm-0 mb-5 create-project-sec ">
+                     <!--begin::Button-->
+                     <a href="#" class="btn btn-md fs-7 btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#create-project">Create Project</a>
+                     <!--end::Button-->
+                  </div>
+               </form>
+            </div>
+         </div>
+         <div _ngcontent-btt-c175="" class="separator mt-2"></div>
+         <!--begin::Body-->
+         <div class="card-body pt-0 pb-0 px-6 ">
+            <!--begin::Table container-->
+
+            <div class="table-responsive mt-5 all-project-list">
+
+               <nz-spin nzTip="Loading..." [nzSpinning]="isSpinning">
+                  <nz-result *ngIf="projectList.length<1 && isError " nzStatus="500" nzTitle="500"
+                     nzSubTitle="Sorry, there is an error on server.">
+                     <div nz-result-extra>
+
+                     </div>
+                  </nz-result>
+
+                  <table *ngIf="!isError" class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                     <!--begin::Table head-->
+
+                     <thead>
+                        <tr class="text-muted">
+                           <th class="w-50px fs-5 fw-bolder text-dark">
+                              <!-- <div class="form-check form-check-sm form-check-custom form-check-solid">
+                              <span class="btn btn-icon btn-active-light-primary svg-icon-sm w-auto h-auto">
+                                
+                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    width="18px" height="18px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                       <polygon points="0 0 24 0 24 24 0 24" />
+                                       <path
+                                          d="M12,18 L7.91561963,20.1472858 C7.42677504,20.4042866 6.82214789,20.2163401 6.56514708,19.7274955 C6.46280801,19.5328351 6.42749334,19.309867 6.46467018,19.0931094 L7.24471742,14.545085 L3.94038429,11.3241562 C3.54490071,10.938655 3.5368084,10.3055417 3.92230962,9.91005817 C4.07581822,9.75257453 4.27696063,9.65008735 4.49459766,9.61846284 L9.06107374,8.95491503 L11.1032639,4.81698575 C11.3476862,4.32173209 11.9473121,4.11839309 12.4425657,4.36281539 C12.6397783,4.46014562 12.7994058,4.61977315 12.8967361,4.81698575 L14.9389263,8.95491503 L19.5054023,9.61846284 C20.0519472,9.69788046 20.4306287,10.2053233 20.351211,10.7518682 C20.3195865,10.9695052 20.2170993,11.1706476 20.0596157,11.3241562 L16.7552826,14.545085 L17.5353298,19.0931094 C17.6286908,19.6374458 17.263103,20.1544017 16.7187666,20.2477627 C16.5020089,20.2849396 16.2790408,20.2496249 16.0843804,20.1472858 L12,18 Z"
+                                          fill="#000000" />
+                                    </g>
+                                 </svg>
+    
+                              </span>
+                           </div> -->
+                           </th>
+                           <th class="w-lg-250px w-225px fs-5 fw-bolder text-dark">Project Name</th>
+                           <th class="w-lg-150px w-100px fs-5 fw-bolder text-dark">Key</th>
+                           <th class="w-lg-200px w-150px fs-5 fw-bolder text-dark">Type</th>
+                           <th class="w-lg-250px w-150px fs-5 fw-bolder text-dark">Lead</th>
+                           <th class="w-150px fs-5 fw-bolder text-dark ps-10">Action</th>
+                        </tr>
+                     </thead>
+                     <!--end::Table head-->
+                     <!--begin::Table body-->
+
+                     <tbody *ngIf="projectList.length >0">
+
+                        <tr *ngFor="let item of projectList   | paginate: config">
+
+                           <td class="w-50px">
+                           </td>
+                           <td class="w-lg-250px w-225px">
+                              <a class="text-dark text-hover-primary fs-6 d-flex align-items-center"
+                                 [routerLink]="['/'+organisation+'/project/'+item.key,'backlog']">
+                                 <img [src]="baseUrl+item.avatar" alt="img" class="img-fluid w-20px me-3">
+                                 <div class="text-truncate w-lg-250px w-225px text-dark pName">
+                                    {{item.projectName}}
+                                 </div>
+                              </a>
+
+                           </td>
+                           <td class="w-lg-150px w-100px">
+                              <h6 class="text-dark  d-block fs-6 fw-normal  w-lg-150px w-100px"> {{item.key}} </h6>
+                           </td>
+                           <td class="w-lg-200px w-150px">
+                              <h6 class="text-dark  d-block fs-6 fw-normal text-truncate w-lg-200px w-150px lh-base">
+                                 {{item.projectType}}</h6>
+                           </td>
+                           <td class="w-lg-200px w-150px" (mouseout)="my.close()">
+                              <div class="on-hover-description" ngbDropdown #my="ngbDropdown" container="body"
+                                 placement="bottom-right">
+                                 <div tabindex="0" ngbDropdownToggle id="navbarDropdown2" (mouseover)="my.open()"
+                                    ngbDropdownAnchor>
+                                    <div class="w-100 me-2 d-flex  align-items-center cursor-pointer">
+                                       <div
+                                          [ngStyle]="{'background-color': stringToHslColor(item.projectLead?.fullName)}"
+                                          class="user-profile text-capitalize  rounded-circle me-4  w-25px h-25px d-flex align-items-center justify-content-center text-white">
+                                          {{item.projectLead?.fullName[0]}}
+
+                                       </div>
+                                       <h5
+                                          class="text-dark text-hover-primary fw-normal d-block fs-6 text-truncate w-150px mb-0 text-capitalize">
+                                          {{item.projectLead?.fullName}}</h5>
+                                    </div>
+                                 </div>
+                                 <div (mouseover)="my.open()" (mouseout)="my.close()"
+                                    class="user-brief-description shadow rounded dropdown-menu dropdown-menu-end"
+                                    ngbDropdownMenu aria-labelledby="navbarDropdown2">
+                                    <div class="card-header border-0 p-5">
+                                       <div class="d-flex w-100">
+                                          <div
+                                             [ngStyle]="{'background-color': stringToHslColor(item.projectLead?.fullName)}"
+                                             class="profile-img rounded-circle me-4  w-80px h-80px d-flex align-items-center justify-content-center text-white fs-2 me-3 text-uppercase">
+                                             {{item.projectLead?.fullName[0]}}{{item.projectLead?.fullName?.split('
+                                             ')[1]?.[0]}}
+                                          </div>
+                                          <div class="">
+                                             <h4 class="text-capitalize">{{item.projectLead?.fullName}}</h4>
+                                             <p class="fw-normal mb-2">Project Manager</p>
+                                             <div class="d-flex mb-6">
+                                                <div class="icon-img me-2">
+                                                   <span class="svg-icon svg-icon-dark svg-icon-1">
+                                                      <svg xmlns="http://www.w3.org/2000/svg"
+                                                         xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                         height="24px" viewBox="0 0 24 24" version="1.1">
+                                                         <g stroke="none" stroke-width="1" fill="none"
+                                                            fill-rule="evenodd">
+                                                            <rect x="0" y="0" width="24" height="24"></rect>
+                                                            <path
+                                                               d="M5,6 L19,6 C20.1045695,6 21,6.8954305 21,8 L21,17 C21,18.1045695 20.1045695,19 19,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,8 C3,6.8954305 3.8954305,6 5,6 Z M18.1444251,7.83964668 L12,11.1481833 L5.85557487,7.83964668 C5.4908718,7.6432681 5.03602525,7.77972206 4.83964668,8.14442513 C4.6432681,8.5091282 4.77972206,8.96397475 5.14442513,9.16035332 L11.6444251,12.6603533 C11.8664074,12.7798822 12.1335926,12.7798822 12.3555749,12.6603533 L18.8555749,9.16035332 C19.2202779,8.96397475 19.3567319,8.5091282 19.1603533,8.14442513 C18.9639747,7.77972206 18.5091282,7.6432681 18.1444251,7.83964668 Z"
+                                                               fill="#000000"></path>
+                                                         </g>
+                                                      </svg>
+                                                   </span>
+                                                </div>
+                                                <div class="user-email ">
+                                                   {{item.projectLead?.email}}
+                                                </div>
+                                             </div>
+                                             <a [routerLink]="['/'+organisation+'/my-profile/'+item.projectLead?._id]"
+                                                class="btn btn-secondary btn-sm">View
+                                                profile</a>
+                                          </div>
+                                       </div>
+                                    </div>
+
+                                 </div>
+                              </div>
+                           </td>
+                           <td class="text-end w-150px">
+                              <div class="d-flex align-items-center justify-content-center">
+                                 <div class="me-3">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#edit-project"
+                                       (click)="editProject(item._id)"
+                                       class="d-flex bg-light align-items-center justify-content-center w-30px h-30px rounded">
+                                       <span class="svg-icon svg-icon-light "><svg xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
+                                             viewBox="0 0 24 24" version="1.1">
+                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24" />
+                                                <path
+                                                   d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z"
+                                                   fill="#000000" fill-rule="nonzero"
+                                                   transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) " />
+                                                <rect fill="#000000" opacity="0.3" x="5" y="20" width="15" height="2"
+                                                   rx="1" />
+                                             </g>
+                                          </svg></span>
+                                    </a>
+                                 </div>
+                                 <div class="me-3">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#delete-project"
+                                       (click)="delete(item._id)"
+                                       class="d-flex align-items-center bg-light justify-content-center w-30px h-30px rounded">
+                                       <span class="svg-icon svg-icon-light"><svg xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
+                                             viewBox="0 0 24 24" version="1.1">
+                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24" />
+                                                <path
+                                                   d="M6,8 L18,8 L17.106535,19.6150447 C17.04642,20.3965405 16.3947578,21 15.6109533,21 L8.38904671,21 C7.60524225,21 6.95358004,20.3965405 6.89346498,19.6150447 L6,8 Z M8,10 L8.45438229,14.0894406 L15.5517885,14.0339036 L16,10 L8,10 Z"
+                                                   fill="#000000" fill-rule="nonzero" />
+                                                <path
+                                                   d="M14,4.5 L14,3.5 C14,3.22385763 13.7761424,3 13.5,3 L10.5,3 C10.2238576,3 10,3.22385763 10,3.5 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z"
+                                                   fill="#000000" opacity="0.3" />
+                                             </g>
+                                          </svg></span>
+                                    </a>
+                                 </div>
+                                 <!-- <div>
+                                    <a [routerLink]="['/'+organisation+'/project-settings/'+item?._id]"
+                                       class="d-flex align-items-center bg-light justify-content-center w-30px h-30px rounded">
+                                       <span class="svg-icon svg-icon-1"><svg _ngcontent-mtj-c145=""
+                                             xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
+                                             viewBox="0 0 24 24" version="1.1">
+                                             <g _ngcontent-mtj-c145="" stroke="none" stroke-width="1" fill="none"
+                                                fill-rule="evenodd">
+                                                <rect _ngcontent-mtj-c145="" x="0" y="0" width="24" height="24"></rect>
+                                                <path _ngcontent-mtj-c145=""
+                                                   d="M18.6225,9.75 L18.75,9.75 C19.9926407,9.75 21,10.7573593 21,12 C21,13.2426407 19.9926407,14.25 18.75,14.25 L18.6854912,14.249994 C18.4911876,14.250769 18.3158978,14.366855 18.2393549,14.5454486 C18.1556809,14.7351461 18.1942911,14.948087 18.3278301,15.0846699 L18.372535,15.129375 C18.7950334,15.5514036 19.03243,16.1240792 19.03243,16.72125 C19.03243,17.3184208 18.7950334,17.8910964 18.373125,18.312535 C17.9510964,18.7350334 17.3784208,18.97243 16.78125,18.97243 C16.1840792,18.97243 15.6114036,18.7350334 15.1896699,18.3128301 L15.1505513,18.2736469 C15.008087,18.1342911 14.7951461,18.0956809 14.6054486,18.1793549 C14.426855,18.2558978 14.310769,18.4311876 14.31,18.6225 L14.31,18.75 C14.31,19.9926407 13.3026407,21 12.06,21 C10.8173593,21 9.81,19.9926407 9.81,18.75 C9.80552409,18.4999185 9.67898539,18.3229986 9.44717599,18.2361469 C9.26485393,18.1556809 9.05191298,18.1942911 8.91533009,18.3278301 L8.870625,18.372535 C8.44859642,18.7950334 7.87592081,19.03243 7.27875,19.03243 C6.68157919,19.03243 6.10890358,18.7950334 5.68746499,18.373125 C5.26496665,17.9510964 5.02757002,17.3784208 5.02757002,16.78125 C5.02757002,16.1840792 5.26496665,15.6114036 5.68716991,15.1896699 L5.72635306,15.1505513 C5.86570889,15.008087 5.90431906,14.7951461 5.82064513,14.6054486 C5.74410223,14.426855 5.56881236,14.310769 5.3775,14.31 L5.25,14.31 C4.00735931,14.31 3,13.3026407 3,12.06 C3,10.8173593 4.00735931,9.81 5.25,9.81 C5.50008154,9.80552409 5.67700139,9.67898539 5.76385306,9.44717599 C5.84431906,9.26485393 5.80570889,9.05191298 5.67216991,8.91533009 L5.62746499,8.870625 C5.20496665,8.44859642 4.96757002,7.87592081 4.96757002,7.27875 C4.96757002,6.68157919 5.20496665,6.10890358 5.626875,5.68746499 C6.04890358,5.26496665 6.62157919,5.02757002 7.21875,5.02757002 C7.81592081,5.02757002 8.38859642,5.26496665 8.81033009,5.68716991 L8.84944872,5.72635306 C8.99191298,5.86570889 9.20485393,5.90431906 9.38717599,5.82385306 L9.49484664,5.80114977 C9.65041313,5.71688974 9.7492905,5.55401473 9.75,5.3775 L9.75,5.25 C9.75,4.00735931 10.7573593,3 12,3 C13.2426407,3 14.25,4.00735931 14.25,5.25 L14.249994,5.31450877 C14.250769,5.50881236 14.366855,5.68410223 14.552824,5.76385306 C14.7351461,5.84431906 14.948087,5.80570889 15.0846699,5.67216991 L15.129375,5.62746499 C15.5514036,5.20496665 16.1240792,4.96757002 16.72125,4.96757002 C17.3184208,4.96757002 17.8910964,5.20496665 18.312535,5.626875 C18.7350334,6.04890358 18.97243,6.62157919 18.97243,7.21875 C18.97243,7.81592081 18.7350334,8.38859642 18.3128301,8.81033009 L18.2736469,8.84944872 C18.1342911,8.99191298 18.0956809,9.20485393 18.1761469,9.38717599 L18.1988502,9.49484664 C18.2831103,9.65041313 18.4459853,9.7492905 18.6225,9.75 Z"
+                                                   fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                                                <path _ngcontent-mtj-c145=""
+                                                   d="M12,15 C13.6568542,15 15,13.6568542 15,12 C15,10.3431458 13.6568542,9 12,9 C10.3431458,9 9,10.3431458 9,12 C9,13.6568542 10.3431458,15 12,15 Z"
+                                                   fill="#000000"></path>
+                                             </g>
+                                          </svg></span>
+                                    </a>
+                                 </div> -->
+                              </div>
+                           </td>
+                        </tr>
+
+                     </tbody>
+
+                     <tbody *ngIf="projectList.length <1">
+                        <tr>
+                           <td colspan="6">
+                              <h4 class="text-center py-xl-20 my-xl-20 py-10 my-10 pb-5 display-5">No data </h4>
+                           </td>
+                        </tr>
+
+                     </tbody>
+                     <!--end::Table body-->
+                  </table>
+               </nz-spin>
+               <!--end::Table-->
+            </div>
+            <div *ngIf="projectList.length>10" class="my-10 cooper-pagination">
+               <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+
+               <!-- <ul class="pagination justify-content-end">
+         <li class="page-item previous disabled"><a href="#" class="page-link"><i class="previous"></i></a></li>
+         <li class="page-item active"><a href="projects.html" class="page-link">1</a></li>
+         <li class="page-item"><a href="#" class="page-link">2</a></li>
+         <li class="page-item "><a href="#" class="page-link">3</a></li>
+         <li class="page-item next"><a href="#"  class="page-link"><i class="next"></i></a></li>
+      </ul> -->
+            </div>
+            <!--end::Table container-->
+         </div>
+
+
+         <create-project-modal (parentFunction)="parentFunction($event)"></create-project-modal>
+         <edit-project-modal [projectDetails]="projectDetails" (editParentFunction)="editParentFunction($event)">
+         </edit-project-modal>
+
+
+
+         <div class="modal fade " tabindex="-1" id="delete-project">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                  <div class="modal-header pb-0 border-0 text-center">
+                     <h3 class="modal-title w-100 text-center">Are you Sure you want to delete ???</h3>
+                  </div>
+                  <div class="modal-body">
+                     <form>
+                        <div class="row">
+                           <div class="card-footer col-12  border-0 text-center">
+                              <button type="button" class="btn btn-secondary btn-sm me-3"
+                                 data-bs-dismiss="modal">Cancel</button>
+                              <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"
+                                 (click)="DeleteProject()">Delete</button>
+                           </div>
+                        </div>
+
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>

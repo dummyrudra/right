@@ -1,0 +1,125 @@
+<div class="modal fade" tabindex="-1" id="kt_modal_1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header py-3">
+                <h4 class="modal-title mb-0">{{projectKey}}: {{sprint.sprintName}}</h4>
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-light" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                            height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(4.000000, 4.000000)"
+                                    fill="#000000">
+                                    <rect x="0" y="7" width="16" height="2" rx="1"></rect>
+                                    <rect opacity="0.3"
+                                        transform="translate(8.000000, 8.000000) rotate(-270.000000) translate(-8.000000, -8.000000) "
+                                        x="0" y="7" width="16" height="2" rx="1"></rect>
+                                </g>
+                            </g>
+                        </svg>
+                    </span>
+                </div>
+                <!--end::Close-->
+            </div>
+            <form [formGroup]="form" class="modal-body">
+                <div class="input-group mb-5">
+                    <label class="fw-bold fs-6 p-0 mb-2 w-100">Sprint Name*</label>
+                    <input type="text" class="form-control form-control-solid form-control-lg fs-7 rounded"
+                        value="RI Sprint 2" formControlName="sprintName" />
+                </div>
+                <div class="input-group mb-6">
+                    <label class="fw-bold fs-6 p-0 mb-2 w-100">Duration</label>
+                    <div class="position-relative w-100" *ngIf="!isCustom || form.get('duration')?.value<=4" ngbDropdown>
+                        <button type="button"
+                        ngbDropdownToggle   
+                            class="btn btn-light text-start rounded w-100 fs-7 py-3 px-4 menu-dropdown rounded bg-light"
+                            >
+                            {{form.get('duration')?.value}} {{form.get('duration')?.value>1?'Weeks':'Week'}}
+                            <span class="float-end">
+                                <span class="svg-icon svg-icon-primary svg-icon mx-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                                            <path
+                                                d="M6.70710678,15.7071068 C6.31658249,16.0976311 5.68341751,16.0976311 5.29289322,15.7071068 C4.90236893,15.3165825 4.90236893,14.6834175 5.29289322,14.2928932 L11.2928932,8.29289322 C11.6714722,7.91431428 12.2810586,7.90106866 12.6757246,8.26284586 L18.6757246,13.7628459 C19.0828436,14.1360383 19.1103465,14.7686056 18.7371541,15.1757246 C18.3639617,15.5828436 17.7313944,15.6103465 17.3242754,15.2371541 L12.0300757,10.3841378 L6.70710678,15.7071068 Z"
+                                                fill="#000000" fill-rule="nonzero"
+                                                transform="translate(12.000003, 11.999999) rotate(-180.000000) translate(-12.000003, -11.999999) ">
+                                            </path>
+                                        </g>
+                                    </svg>
+                                    <!--end::Svg Icon-->
+                                </span>
+                            </span>
+                        </button>
+                        <!--begin::Menu 2-->
+                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary btn-md fs-7 w-md-450px w-325px fw-bold py-3"
+                        ngbDropdownMenu>
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-3" *ngFor="let item of duration">
+                                <button (click)="selectDuration(item)" class="btn menu-link px-3" ngbDropdownItem>{{item.name}}</button>
+                            </div>
+                            <!-- <div class="menu-item px-3">
+                                <a href="#" class="menu-link px-3">{{item.name}}</a>
+                            </div>
+                            <div class="menu-item px-3">
+                                <a href="#" class="menu-link px-3">{{item.name}}</a>
+                            </div>
+                            <div class="menu-item px-3">
+                                <a href="#" class="menu-link px-3">{{item.name}}</a>
+                            </div>
+                            <div class="menu-item px-3">
+                                <a href="#" class="menu-link px-3">Custom</a>
+                            </div> -->
+                        </div>
+                    </div>
+                    <input type="number" class="form-control form-control-solid form-control-lg fs-7 rounded"
+                        value="RI Sprint 2" *ngIf="isCustom ||  form.get('duration')?.value>4" formControlName="duration"
+                        (keyup)="selectDuration({name:'week',week:customDuration.value})" #customDuration>
+                </div>
+                <div class="mb-6 input-group">
+                    <label class="fw-bold fs-6 p-0 mb-2 w-100">Start Date</label>
+                    <!-- <input type="date" class="form-control form-control-solid form-control-lg fs-7 rounded"
+                        placeholder="Pick date rage" id="kt_daterangepicker_6" formControlName="startDate"
+                        (change)="selectStartDate(startDate.value)" #startDate/> -->
+                        <div class="form-control form-control-solid p-0 d-flex align-items-center form-control-lg  fs-7 rounded">
+                        <input class="bg-transparent h-100 border-0 fs-7 form-control" placeholder="yyyy-mm-dd"
+                            name="dpFromDate" formControlName="startDate" ngbDatepicker #d="ngbDatepicker"
+                            (ngModelChange)="selectStartDate(startDate.value)" #startDate>
+                        <button class="btn btn-outline-secondary h-100 calendar ms-auto px-4" (click)="d.toggle()" type="button">
+                            <i class="bi bi-calendar px-0"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mb-6 input-group">
+                    <label class="fw-bold fs-6 p-0 mb-2 w-100">End Date</label>
+                    <!-- <input type="date" class="form-control form-control-solid form-control-lg fs-7 rounded"
+                        placeholder="Pick date rage" id="kt_daterangepicker_6" formControlName="endDate"
+                        (change)="selectEndDate(endDate.value)" #endDate /> -->
+                        <div class="form-control form-control-solid p-0 d-flex align-items-center form-control-lg  fs-7 rounded">
+                    <input class="form-control  fs-7 bg-transparent h-100 border-0" placeholder="yyyy-mm-dd"
+                        name="dpToDate" formControlName="endDate" ngbDatepicker #d2="ngbDatepicker"
+                        (change)="selectEndDate(endDate.value)"
+                         #endDate>
+                    <button class="btn btn-outline-secondary calendar ms-auto px-4" (click)="d2.toggle()" type="button">
+                        <i class="bi bi-calendar px-0"></i>
+                    </button>
+                    </div>
+                </div>
+                <div class=" input-group">
+                    <label class="fw-bold fs-6 p-0 mb-2 w-100">Sprint goal</label>
+                    <textarea class="form-control form-control-solid form-control-lg fs-7 rounded resize-none rounded"
+                        formControlName="sprintGoal"></textarea>
+                </div>
+            </form>
+            <div class="modal-footer py-3">
+                <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary btn-sm" (click)="editSprint()"
+                    [attr.data-bs-dismiss]="'modal'" *ngIf="!sprint?.isStart">Update</button>
+                <button type="button" class="btn btn-primary btn-sm" (click)="startSprint()"
+                    [attr.data-bs-dismiss]="'modal'" *ngIf="sprint?.isStart">Start</button>
+            </div>
+        </div>
+    </div>
+</div>

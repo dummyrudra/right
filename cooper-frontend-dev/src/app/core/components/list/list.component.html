@@ -1,0 +1,467 @@
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <div class="container-fluid">
+        <nz-result *ngIf="!lists" nzStatus="500" nzTitle="500" nzSubTitle="Sorry, there is an error on server.">
+            <div nz-result-extra>
+
+            </div>
+        </nz-result>
+        <div class="card px-0 pt-20 pb-5" *ngIf="lists">
+            <div
+                class="card-header border-0 pt-4 pb-0 px-6 mb-6 sticky-title-section position-absolute top-0 bg-white w-100 left-0">
+                <div class="d-sm-flex align-items-center w-100 justify-content-between">
+                    <h1 class="text-dark m-0 fs-2">
+                        List
+                    </h1>
+                    <div class="d-flex align-items-center ">
+                        <div data-kt-search-element="wrapper">
+                            <!-- form -->
+                            <form data-kt-search-element="form"
+                                class="d-flex flex-wrap align-items-center w-100 mb-5 mb-lg-0" autocomplete="off">
+                                <!-- search -->
+                                <div class="search-custom  position-relative">
+                                    <!--begin::Hidden input(Added to disable form autocomplete)-->
+                                    <input type="hidden">
+                                    <!--end::Hidden input-->
+                                    <!--begin::Icon-->
+                                    <!--begin::Svg Icon | path: icons/duotune/general/gen004.svg-->
+                                    <span
+                                        class="svg-icon svg-icon-2 svg-icon-gray-700 position-absolute top-50 translate-middle-y ms-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none">
+                                            <path
+                                                d="M21.7 18.9L18.6 15.8C17.9 16.9 16.9 17.9 15.8 18.6L18.9 21.7C19.3 22.1 19.9 22.1 20.3 21.7L21.7 20.3C22.1 19.9 22.1 19.3 21.7 18.9Z"
+                                                fill="black"></path>
+                                            <path opacity="0.3"
+                                                d="M11 20C6 20 2 16 2 11C2 6 6 2 11 2C16 2 20 6 20 11C20 16 16 20 11 20ZM11 4C7.1 4 4 7.1 4 11C4 14.9 7.1 18 11 18C14.9 18 18 14.9 18 11C18 7.1 14.9 4 11 4ZM8 11C8 9.3 9.3 8 11 8C11.6 8 12 7.6 12 7C12 6.4 11.6 6 11 6C8.2 6 6 8.2 6 11C6 11.6 6.4 12 7 12C7.6 12 8 11.6 8 11Z"
+                                                fill="black"></path>
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                    <!--end::Icon-->
+                                    <!--begin::Input-->
+                                    <input type="text"
+                                        class="form-control w-200px form-control-solid ps-11 fs-7 form-control-lg"
+                                        name="search" value="" placeholder="Search" data-kt-search-element="input"
+                                        (keyup)="search($event)">
+                                    <!--end::Input-->
+                                    <!--begin::Spinner-->
+                                    <span class="position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-5"
+                                        data-kt-search-element="spinner">
+                                        <span class="spinner-border h-15px w-15px align-middle text-gray-400"></span>
+                                    </span>
+                                    <!--end::Spinner-->
+                                    <!--begin::Reset-->
+                                    <span
+                                        class="btn btn-flush btn-active-color-primary position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-4"
+                                        data-kt-search-element="clear">
+                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                        <span class="svg-icon svg-icon-2 svg-icon-lg-1 me-0">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                                    transform="rotate(-45 6 17.3137)" fill="black"></rect>
+                                                <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                                    transform="rotate(45 7.41422 6)" fill="black"></rect>
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                    </span>
+                                    <!--end::Reset-->
+                                </div>
+                                <!-- search ends -->
+                                <!-- epic dropdown -->
+                                <div class="epic-custom ms-sm-4 me-2">
+                                    <div class="form-group m-0">
+                                        <button type="button" class="btn btn-md btn-light fs-7 px-4 py-3 menu-dropdown"
+                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end"
+                                            data-kt-menu-flip="top-end">
+                                            Epic
+                                            <span class="svg-icon svg-icon-dark svg-icon mx-0">
+                                                <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Navigation/Angle-down.svg-->
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                    height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                                                        <path
+                                                            d="M6.70710678,15.7071068 C6.31658249,16.0976311 5.68341751,16.0976311 5.29289322,15.7071068 C4.90236893,15.3165825 4.90236893,14.6834175 5.29289322,14.2928932 L11.2928932,8.29289322 C11.6714722,7.91431428 12.2810586,7.90106866 12.6757246,8.26284586 L18.6757246,13.7628459 C19.0828436,14.1360383 19.1103465,14.7686056 18.7371541,15.1757246 C18.3639617,15.5828436 17.7313944,15.6103465 17.3242754,15.2371541 L12.0300757,10.3841378 L6.70710678,15.7071068 Z"
+                                                            fill="#000000" fill-rule="nonzero"
+                                                            transform="translate(12.000003, 11.999999) rotate(-180.000000) translate(-12.000003, -11.999999) ">
+                                                        </path>
+                                                    </g>
+                                                </svg>
+                                                <!--end::Svg Icon-->
+                                            </span>
+                                        </button>
+                                        <!--begin::Menu 2-->
+                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold w-200px py-3"
+                                            data-kt-menu="true" data-popper-placement="bottom-end">
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <a href="#" class="menu-link px-3"> Issue without Epic</a>
+                                            </div>
+                                            <div class="menu-item px-3">
+                                                <a href="#" class="menu-link px-3">Redesign </a>
+                                            </div>
+                                            <div class="menu-item px-3">
+                                                <a href="#" class="menu-link px-3">Banner design</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- epic dropdown ends -->
+                                <!-- bugs dropdown -->
+                                <div class="bugs-custom ms-sm-2 me-sm-4 me-2">
+                                    <div class="form-group m-0">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div ngbDropdown class="d-inline-block">
+                                                    <button class="btn btn-md btn-light  py-3 fs-7 px-4 btn-arrow-none"
+                                                        id="dropdownBasic1" ngbDropdownToggle>{{filter.issueType ||
+                                                        'issue type' | titlecase}}
+                                                        <span class="svg-icon svg-icon-dark svg-icon mx-0">
+                                                            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Navigation/Angle-down.svg-->
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                                height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                <g stroke="none" stroke-width="1" fill="none"
+                                                                    fill-rule="evenodd">
+                                                                    <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                                                                    <path
+                                                                        d="M6.70710678,15.7071068 C6.31658249,16.0976311 5.68341751,16.0976311 5.29289322,15.7071068 C4.90236893,15.3165825 4.90236893,14.6834175 5.29289322,14.2928932 L11.2928932,8.29289322 C11.6714722,7.91431428 12.2810586,7.90106866 12.6757246,8.26284586 L18.6757246,13.7628459 C19.0828436,14.1360383 19.1103465,14.7686056 18.7371541,15.1757246 C18.3639617,15.5828436 17.7313944,15.6103465 17.3242754,15.2371541 L12.0300757,10.3841378 L6.70710678,15.7071068 Z"
+                                                                        fill="#000000" fill-rule="nonzero"
+                                                                        transform="translate(12.000003, 11.999999) rotate(-180.000000) translate(-12.000003, -11.999999) ">
+                                                                    </path>
+                                                                </g>
+                                                            </svg>
+                                                            <!--end::Svg Icon-->
+                                                        </span>
+                                                    </button>
+                                                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1"
+                                                        class="menu menu-sub menu-sub-dropdown menu-column  menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold w-200px py-3">
+                                                        <div class="menu-item px-3" *ngIf="filter.issueType!=='bug'"
+                                                            ngbDropdownItem>
+                                                            <a (click)="addFilter('bug')" class="menu-link px-3">Bug</a>
+                                                        </div>
+                                                        <div class="menu-item px-3" *ngIf="filter.issueType!=='story'"
+                                                            ngbDropdownItem>
+                                                            <a (click)="addFilter('story')" class="menu-link px-3">Story
+                                                            </a>
+                                                        </div>
+                                                        <div class="menu-item px-3" *ngIf="filter.issueType!=='task'"
+                                                            ngbDropdownItem>
+                                                            <a (click)="addFilter('task')"
+                                                                class="menu-link px-3">Task</a>
+                                                        </div>
+                                                        <div class="menu-item px-3" *ngIf="filter.issueType!=='epic'"
+                                                            ngbDropdownItem>
+                                                            <a (click)="addFilter('epic')"
+                                                                class="menu-link px-3">Epic</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- bugs dropdown ends -->
+                                <div class="d-flex align-items-center py-1">
+                                    <!--begin::Button-->
+                                    <a (click)="clearFilter()" class="btn fs-7 btn-secondary btn-md">Clear Filter</a>
+                                    <!--end::Button-->
+                                </div>
+                            </form>
+                            <!-- form ends -->
+                            <!--end::Form-->
+                        </div>
+                        <!--end::Wrapper-->
+                    </div>
+                </div>
+            </div>
+            <div class="separator mt-2"></div>
+            <nz-spin nzTip="Loading..." [nzSpinning]="isSpinning"></nz-spin>
+            <div class="card-body pt-0 pb-6 px-6 max-height-64vh overflow-auto" cdkDropListGroup cdkScrollable>
+                <div class="p-0 mt-5" *ngFor="let item of lists;index as i">
+                    <!--begin::Accordion-->
+                    <div class="accordion accordion-icon-toggle bg-light rounded px-4" id="sprint_{{i}}">
+                        <!--begin::Item-->
+                        <div class="mb-3">
+                            <!--begin::Header-->
+                            <div class="dragOver drag-header" cdkDropList (cdkDropListDropped)="dropOver($event)" id="{{item._id}}">
+                                <div class="accordion-header  d-flex align-items-center">
+                                    <div class="d-sm-flex w-100 align-items-center drag-drop-headertask-page drag-drop-header">
+                                        <div class="sprint-action-detail" data-bs-toggle="collapse"
+                                            [attr.data-bs-target]="'#sprint_1_item_'+i">
+                                            <div class="py-3 d-flex align-items-center">
+                                                <span class="accordionicon">
+                                                    <span class="svg-icon svg-icon-5 svg-icon-dark">
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                            height="24px" viewBox="0 0 24 24" version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none"
+                                                                fill-rule="evenodd">
+                                                                <polygon points="0 0 24 0 24 24 0 24" />
+                                                                <path
+                                                                    d="M6.70710678,15.7071068 C6.31658249,16.0976311 5.68341751,16.0976311 5.29289322,15.7071068 C4.90236893,15.3165825 4.90236893,14.6834175 5.29289322,14.2928932 L11.2928932,8.29289322 C11.6714722,7.91431428 12.2810586,7.90106866 12.6757246,8.26284586 L18.6757246,13.7628459 C19.0828436,14.1360383 19.1103465,14.7686056 18.7371541,15.1757246 C18.3639617,15.5828436 17.7313944,15.6103465 17.3242754,15.2371541 L12.0300757,10.3841378 L6.70710678,15.7071068 Z"
+                                                                    fill="#000000" fill-rule="nonzero"
+                                                                    transform="translate(12.000003, 11.999999) scale(-1, 1) rotate(-270.000000) translate(-12.000003, -11.999999) " />
+                                                            </g>
+                                                        </svg>
+                                                        <!--end::Svg Icon-->
+                                                    </span>
+                                                </span>
+                                                <h3 class="fs-6 fw-bold mb-0 ms-2 me-2">{{item?.listName |
+                                                    titlecase}}<small
+                                                        class="text-muted ms-2 fs-7 fw-light">({{taskCount[i]}}
+                                                        {{taskCount[i]>1?'issues':'issue'}})</small></h3>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="ms-auto py-3 d-flex sprint-action justify-content-sm-end align-items-center">
+                                            <div class="d-flex align-items-center" (click)="sort(item)">
+                                                <!-- sort -->
+                                                <span class="badge badge-white rounded badge-square h-35px w-35px"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Sort">
+                                                    <span class="svg-icon svg-icon-primary">
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                            height="24px" viewBox="0 0 24 24" version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none"
+                                                                fill-rule="evenodd">
+                                                                <polygon points="0 0 24 0 24 24 0 24" />
+                                                                <rect fill="#000000" opacity="0.3"
+                                                                    transform="translate(6.000000, 11.000000) rotate(-180.000000) translate(-6.000000, -11.000000) "
+                                                                    x="5" y="5" width="2" height="12" rx="1" />
+                                                                <path
+                                                                    d="M8.29289322,14.2928932 C8.68341751,13.9023689 9.31658249,13.9023689 9.70710678,14.2928932 C10.0976311,14.6834175 10.0976311,15.3165825 9.70710678,15.7071068 L6.70710678,18.7071068 C6.31658249,19.0976311 5.68341751,19.0976311 5.29289322,18.7071068 L2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 C2.68341751,13.9023689 3.31658249,13.9023689 3.70710678,14.2928932 L6,16.5857864 L8.29289322,14.2928932 Z"
+                                                                    fill="#000000" fill-rule="nonzero" />
+                                                                <rect fill="#000000" opacity="0.3"
+                                                                    transform="translate(18.000000, 13.000000) scale(1, -1) rotate(-180.000000) translate(-18.000000, -13.000000) "
+                                                                    x="17" y="7" width="2" height="12" rx="1" />
+                                                                <path
+                                                                    d="M20.2928932,5.29289322 C20.6834175,4.90236893 21.3165825,4.90236893 21.7071068,5.29289322 C22.0976311,5.68341751 22.0976311,6.31658249 21.7071068,6.70710678 L18.7071068,9.70710678 C18.3165825,10.0976311 17.6834175,10.0976311 17.2928932,9.70710678 L14.2928932,6.70710678 C13.9023689,6.31658249 13.9023689,5.68341751 14.2928932,5.29289322 C14.6834175,4.90236893 15.3165825,4.90236893 15.7071068,5.29289322 L18,7.58578644 L20.2928932,5.29289322 Z"
+                                                                    fill="#000000" fill-rule="nonzero"
+                                                                    transform="translate(18.000000, 7.500000) scale(1, -1) translate(-18.000000, -7.500000) " />
+                                                            </g>
+                                                        </svg>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                            <div class="mx-3" ngbDropdown>
+                                                <button type="button"
+                                                    class="btn btn-sm btn-icon btn-bg-secondary btn-active-color-primary menu-dropdown h-35px w-35px"
+                                                    ngbDropdownToggle>
+                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen052.svg-->
+                                                    <span class="svg-icon svg-icon-5 m-0">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                            viewBox="0 0 24 24" fill="none">
+                                                            <rect x="10" y="10" width="4" height="4" rx="2"
+                                                                fill="black">
+                                                            </rect>
+                                                            <rect x="17" y="10" width="4" height="4" rx="2"
+                                                                fill="black">
+                                                            </rect>
+                                                            <rect x="3" y="10" width="4" height="4" rx="2" fill="black">
+                                                            </rect>
+                                                        </svg>
+                                                    </span>
+                                                    <!--end::Svg Icon-->
+                                                </button>
+                                                <!--begin::Menu-->
+                                                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-175px py-4 "
+                                                    ngbDropdownMenu>
+                                                    <p class="px-4 cursor-default">Group Options</p>
+                                                    <div class="separator"></div>
+                                                    <!--begin::Menu item-->
+                                                    <div class="menu-item px-3 mt-3">
+                                                        <a href="" class="menu-link px-3 fw-normal"
+                                                            ngbDropdownItem>Manage Statuses</a>
+                                                    </div>
+                                                    <div class="menu-item px-3">
+                                                        <a href="" class="menu-link px-3 fw-normal" ngbDropdownItem>New
+                                                            Status</a>
+                                                    </div>
+                                                    <div class="menu-item px-3">
+                                                        <a href="" class="menu-link px-3 fw-normal"
+                                                            ngbDropdownItem>Collapse Group</a>
+                                                    </div>
+                                                    <div class="menu-item px-3">
+                                                        <a href="" class="menu-link px-3 fw-normal"
+                                                            ngbDropdownItem>Collapse All
+                                                            Groups</a>
+                                                    </div>
+                                                    <div class="menu-item px-3">
+                                                        <a href="" class="menu-link px-3 fw-normal"
+                                                            data-bs-toggle="modal" data-bs-target="#delete_sprint"
+                                                            ngbDropdownItem>Hide
+                                                            Status</a>
+                                                    </div>
+                                                    <!--end::Menu item-->
+                                                </div>
+                                                <!--end::Menu-->
+                                                <!--end::More-->
+                                            </div>
+                                            <a (click)="openIssueModel()" class="btn btn-primary btn-sm">Add task </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Header-->
+                            <!--begin::Body-->
+                            <div id="sprint_1_item_{{i}}" class="table-responsive fs-6 collapse pb-5"
+                                [attr.data-bs-parent]="'#sprint_'+i">
+                                <div cdkDropList class="w-100 drag" (cdkDropListDropped)="drop($event)"
+                                    id="{{item._id}}">
+                                    <div *ngIf="item.tasks.length==0"
+                                        class="h2 text-secondary d-flex justify-content-center py-4 drag-text">
+                                        Drag Here
+                                    </div>
+                                    <div id="{{item2?._id}}" [cdkDragData]="item?.tasks"
+                                        *ngFor="let item2 of item?.tasks" cdkDrag>
+                                        <div class="cursor-pointer"
+                                            *ngIf="(item2?.issueType==filter?.issueType || filter?.issueType =='') && (item2?.summary?.indexOf(isSearch)>-1)">
+                                            <div class="d-flex  bg-white p-3 border-bottom list">
+                                                <div class="d-flex align-items-center backlog-task"
+                                                    (click)="openTaskModel(item2._id)">
+                                                    <img [src]="'../../../../assets/img/'+issueImage?.[item2.issueType]"
+                                                        class="img-fluid" alt="img">
+                                                    <h6 class="fs-7 fw-normal text-muted mx-3 mb-0 min-w-40px">
+                                                        {{project?.key}}-{{item2?.SN}}</h6>
+                                                    <h6 class="fs-7 mb-0 fw-normal text-truncate">
+                                                        {{item2?.summary}}</h6>
+                                                    <span
+                                                        class="badge badge-light-info ms-3 fw-nomal fs-9 text-uppercase rounded-1">Redesign
+                                                        the full website</span>
+                                                  
+
+                                                </div>
+                                                <div class="ms-auto d-flex align-items-center justify-content-end">
+                                                    <div class="d-flex align-items-center min-w-50px backlog-task-detail justify-content-end small">
+                                                    {{item2?.storyPointEstimate}}
+                                                    {{item2?.storyPointEstimate?'H':''}}
+                                                </div>
+                                                    <div class="row mx-1">
+                                                        <div class="col">
+                                                            <div ngbDropdown class="d-inline-block" container="body">
+                                                                <button
+                                                                    class="btn btn badge badge-light-primary rounded-2 px-2 menu-dropdown rounded-1"
+                                                                    id="dropdownBasic1"
+                                                                    ngbDropdownToggle>{{item2?.listID?.listName |
+                                                                    titlecase}}</button>
+                                                                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                                                    <button ngbDropdownItem
+                                                                        *ngFor="let listItem of lists"
+                                                                        (click)="selectList(item2,listItem)">{{listItem?.listName
+                                                                        | titlecase}}</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-30px">
+                                                        <i class="bi bi-flag-fill" style="color: red;"
+                                                            *ngIf="item2?.flag"></i>
+                                                    </div>
+                                                    <div class="w-30px h-30px d-flex align-items-center">
+                                                        <div *ngIf="item2?.assigneeID"
+                                                            class="user-profile rounded-circle me-2 bg-warning w-20px h-20px d-flex align-items-center justify-content-center fs-7">
+                                                            <img [src]="baseUrl+item2?.assigneeID?.avatar"
+                                                                class="img-fluid rounded-circle" alt="user">
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="w-20px h-20px d-flex align-items-center justify-content-center fs-7">
+                                                        <div ngbDropdown class="delete-task" container="body">
+                                                            <span ngbDropdownToggle
+                                                                class="badge badge-secondary px-2 menu-dropdown">
+                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen052.svg-->
+                                                                <span class="svg-icon svg-icon-5 m-0">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                                        <rect x="10" y="10" width="4" height="4" rx="2"
+                                                                            fill="black"></rect>
+                                                                        <rect x="17" y="10" width="4" height="4" rx="2"
+                                                                            fill="black"></rect>
+                                                                        <rect x="3" y="10" width="4" height="4" rx="2"
+                                                                            fill="black">
+                                                                        </rect>
+                                                                    </svg>
+                                                                </span>
+                                                                <!--end::Svg Icon-->
+                                                            </span>
+                                                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-150px py-4"
+                                                                ngbDropdownMenu>
+                                                                <!--begin::Menu item-->
+                                                                <!-- <div class="menu-item px-3">
+                                                                        <a class="menu-link px-3" ngbDropdownItem>Edit</a>
+                                                                    </div> -->
+                                                                <p class="px-4 cursor-default">Action</p>
+                                                                <div class="separator"></div>
+                                                                <div class="menu-item px-3 mt-3">
+                                                                    <a (click)="openDeleteTaskModal(deleteTaskModal,item2)"
+                                                                        class="menu-link px-3"
+                                                                        ngbDropdownItem>Delete</a>
+                                                                </div>
+                                                                <div class="menu-item  px-3 mt-3">
+                                                                    <a (click)="flag(item2)"
+                                                                        class="menu-link px-3"
+                                                                        ngbDropdownItem>{{!item2?.flag?'Add':'Remove'}} flag</a>
+                                                                </div>
+                                                                <!--end::Menu item-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Body-->
+                        </div>
+                        <!--end::Item-->
+                    </div>
+                    <!--end::Accordion-->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--end::Content-->
+
+
+<!-- delete task modal -->
+<ng-template #deleteTaskModal let-modal>
+    <div class="modal-content">
+        <div class="modal-header py-3">
+            <h4 class="modal-title mb-0">Delete </h4>
+            <!--begin::Close-->
+            <div class="btn btn-icon btn-sm btn-light" (click)="modal.dismiss('Cross click')">
+                <span class="svg-icon svg-icon-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                        height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(4.000000, 4.000000)"
+                                fill="#000000">
+                                <rect x="0" y="7" width="16" height="2" rx="1"></rect>
+                                <rect opacity="0.3"
+                                    transform="translate(8.000000, 8.000000) rotate(-270.000000) translate(-8.000000, -8.000000) "
+                                    x="0" y="7" width="16" height="2" rx="1"></rect>
+                            </g>
+                        </g>
+                    </svg>
+                </span>
+            </div>
+            <!--end::Close-->
+        </div>
+        <div class="modal-body">
+            Are you sure you want to delete {{project.key |uppercase}}-{{deleteTaskValue.SN}}?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light btn-sm" (click)="modal.dismiss('Cross click')">Close</button>
+            <button type="button" class="btn btn-danger btn-sm" (click)="deleteTask(deleteTaskModal)">Delete</button>
+        </div>
+    </div>
+</ng-template>

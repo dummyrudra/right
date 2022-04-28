@@ -1,0 +1,88 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.app-name {
+  font-size: 28px;
+  font-family: "Lato", sans-serif;
+  font-weight: bold;
+}
+.has-gradient-text {
+  background: -webkit-linear-gradient(#13f7f4, #2af598);
+  /* -webkit-background-clip: text; */
+  -webkit-text-fill-color: transparent;
+}
+.board {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 0;
+  min-height: 0;
+}
+.board .board-bar {
+  background: rgba(128, 128, 128, 0.5);
+  padding: 8px 15px;
+}
+.board .board-bar .board-name {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+}
+
+.board .board-wrapper .board-columns .board-column:not(:first-child) {
+  margin-left: 0;
+}
+
+.tasks-container {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+.tasks-container.cdk-drop-list-dragging .task:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.board-action {
+  right: 10px;
+  top: 10px;
+}
+.board-action .dropdown-toggle:after {
+  display: none;
+}
+.board-action {
+  display: none;
+}
+.action-on-hover:hover .board-action {
+  display: block;
+}
+
+.delete-task {
+  display: none;
+}
+.task:hover .delete-task {
+  display: block;
+}
+.dropdown-toggle::after {
+  display: none;
+}
+.delete-task.show {
+  display: block;
+}
+
+.is-invalid {
+  border: 1px solid red !important;
+  border-radius: 5px;
+}

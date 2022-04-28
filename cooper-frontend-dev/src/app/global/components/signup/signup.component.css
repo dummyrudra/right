@@ -1,0 +1,8 @@
+.form-control.ng-invalid.ng-touched{
+    border: solid 2px red;
+    /* border-color: red; */
+}
+
+.dropdown-menu{
+    left: 270px !important;
+}

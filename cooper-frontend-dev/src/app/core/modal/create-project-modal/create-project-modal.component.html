@@ -1,0 +1,262 @@
+<div class="modal fade" tabindex="-1" id="create-project">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header py-3">
+        <h3 class="modal-title">Create Project</h3>
+        <h5>{{ errorMsg }}</h5>
+        <!--begin::Close-->
+        <div class="btn btn-icon btn-sm btn-light" data-bs-dismiss="modal">
+          <span class="svg-icon svg-icon-primary">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              width="24px"
+              height="24px"
+              viewBox="0 0 24 24"
+              version="1.1"
+            >
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g
+                  transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(4.000000, 4.000000)"
+                  fill="#000000"
+                >
+                  <rect x="0" y="7" width="16" height="2" rx="1"></rect>
+                  <rect
+                    opacity="0.3"
+                    transform="translate(8.000000, 8.000000) rotate(-270.000000) translate(-8.000000, -8.000000) "
+                    x="0"
+                    y="7"
+                    width="16"
+                    height="2"
+                    rx="1"
+                  ></rect>
+                </g>
+              </g>
+            </svg>
+          </span>
+        </div>
+        <!--end::Close-->
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="Form">
+          <div class="card-body p-0">
+            <div class="row">
+              <div class="form-group col-sm-6 mb-5">
+                <label class="required fw-bold fs-6 p-0 mb-2 w-100">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  [ngClass]="{
+                    'is-invalid':
+                      Form.controls['projectName'].touched &&
+                      Form.controls['projectName'].errors
+                  }"
+                  formControlName="projectName"
+                  (change)="checkProjectKey($event)"
+                  class="form-control py-2 form-control-lg form-control-solid mb-3 mb-lg-0 fs-7"
+                  placeholder="Project Name"
+                />
+              </div>
+              <div class="form-group col-sm-6 mb-5">
+                <label class="required fw-bold fs-6 p-0 mb-2 w-100">
+                  Key
+                  <span
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="right"
+                    title="Changing the project key will start a background re-index of your project, and may break some external integrations."
+                  >
+                    <span class="svg-icon svg-icon-primary svg-icon-4">
+                      <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Code/Info-circle.svg-->
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        width="24px"
+                        height="24px"
+                        viewBox="0 0 24 24"
+                        version="1.1"
+                      >
+                        <g
+                          stroke="none"
+                          stroke-width="1"
+                          fill="none"
+                          fill-rule="evenodd"
+                        >
+                          <rect x="0" y="0" width="24" height="24" />
+                          <circle
+                            fill="#000000"
+                            opacity="0.3"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                          />
+                          <rect
+                            fill="#000000"
+                            x="11"
+                            y="10"
+                            width="2"
+                            height="7"
+                            rx="1"
+                          />
+                          <rect
+                            fill="#000000"
+                            x="11"
+                            y="7"
+                            width="2"
+                            height="2"
+                            rx="1"
+                          />
+                        </g>
+                      </svg>
+                      <!--end::Svg Icon-->
+                    </span>
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  [ngClass]="{
+                    'is-invalid':
+                      Form.controls['key'].touched &&
+                      Form.controls['key'].errors
+                  }"
+                  formControlName="key"
+                  class="form-control py-2 form-control-lg form-control-solid mb-3 mb-lg-0 fs-7"
+                  placeholder="Key"
+                />
+                <div *ngIf="keyMsg">
+                  <span class="bg-danger">{{ keyError }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <!-- <div class="form-group col-sm-6 mb-5">
+                <label class="fw-bold fs-6 p-0 mb-2 w-100">Url </label>
+                <input
+                  type="text"
+                  formControlName="url"
+                  class="form-control py-2 form-control-lg form-control-solid mb-3 mb-lg-0 fs-7"
+                  placeholder="Project url"
+                />
+              </div> -->
+              <div class="form-group col-sm-6 mb-5">
+                <div class="">
+                  <label class="fw-bold fs-6 p-0 mb-2 w-100">
+                    Project Type
+                  </label>
+                  <ng-select
+                    class="select-red"
+                    placeholder="Project Type"
+                    formControlName="projectType"
+                    [items]="allProjectType"
+                    [ngClass]="{
+                      'is-invalid':
+                        Form.controls['projectType'].touched &&
+                        Form.controls['projectType'].errors
+                    }"
+                    [bindLabel]="'name'"
+                    [bindValue]="'name'"
+                    [searchable]="true"
+                    [multiple]="false"
+                    [clearable]="true"
+                    (change)="changeLeagueOwner($event)"
+                  ></ng-select>
+                  <!-- <select aria-label="Select a Timezone" data-control="select2" data-placeholder="Assignee" class="form-select form-select-lg fs-7 form-select-solid h-auto fw-normal">
+                           <option value="1">Guarav Aery</option>
+                           <option value="2">Amit kumar</option>
+                           <option value="2">Lorem ipsum dolor sit amet asipissisi ladus</option>
+                           <option value="2">Jyoti Negi</option>
+                        </select>     -->
+                </div>
+              </div>
+              <div class="form-group col-sm-6 mb-5">
+                <label class="required fw-bold fs-6 p-0 mb-2 w-100"
+                  >Project Lead
+                </label>
+                <ng-select
+                  class="select-red"
+                  placeholder="Project Lead"
+                  formControlName="projectLead"
+                  [items]="ProjectLead$ | async"
+                  [ngClass]="{
+                    'is-invalid':
+                      Form.controls['projectLead'].touched &&
+                      Form.controls['projectLead'].errors
+                  }"
+                  [bindLabel]="'fullName'"
+                  [bindValue]="'_id'"
+                  [searchable]="true"
+                  [multiple]="false"
+                  [clearable]="true"
+                  (change)="changeLeagueOwner($event)"
+                ></ng-select>
+                <!-- <select aria-label="Select a Timezone" data-control="select2" data-placeholder="Assignee" class="form-select form-select-lg fs-7 form-select-solid h-auto fw-normal">
+                         <option value="1">Guarav Aery</option>
+                         <option value="2">Amit kumar</option>
+                         <option value="2">Lorem ipsum dolor sit amet asipissisi ladus</option>
+                         <option value="2">Jyoti Negi</option>
+                      </select>     -->
+              </div>
+            </div>
+            <div class="row">
+           
+              <div class="form-group col-sm-12 mb-5">
+                <label class="fw-bold fs-6 p-0 mb-2 w-100">Avatar Image</label>
+                <div></div>
+                <div class="custom-file position-relative cursor-pointer">
+                  <input
+                    type="file"
+                    class="custom-file-input"
+                    (change)="onFileSelect($event)"
+                    formControlName="avatar"
+                    id="customFilefile"
+                  />
+                  <label
+                    class="custom-file-label form-control  form-control-lg form-control-solid mb-3 mb-lg-0 fs-7"
+                    for="customFilefile"
+                    >{{ fileName ? fileName : "Choose file" }}</label
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-12 mb-5">
+                <label class="fw-bold fs-6 p-0 mb-2 w-100">Description </label>
+                <textarea
+                  formControlName="description"
+                  [ngClass]="{
+                    'is-invalid':
+                      Form.controls['description'].touched &&
+                      Form.controls['description'].errors
+                  }"
+                  class="form-control resize-none form-control py-2 form-control-lg form-control-solid mb-3 mb-lg-0 fs-7"
+                ></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="card-footer col-12  border-0">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-sm me-3"
+                  [disabled]="!Form.valid"
+                  (click)="submit()"
+                  data-bs-dismiss="modal"
+                >
+                  Save
+                </button>
+                <button
+                  type="button"
+                  (click)="cancel()"
+                  class="btn btn-secondary btn-sm"
+                  data-bs-dismiss="modal"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<notifier-container></notifier-container>

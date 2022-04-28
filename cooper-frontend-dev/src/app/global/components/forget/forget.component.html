@@ -1,0 +1,68 @@
+<!--begin::Forgot-->
+<div class="login-form login-forgot  w-100" id="forget">
+   <!--begin::Form-->
+   <form class="form" [formGroup]="form">
+      <!--begin::Title-->
+      <div class="pb-13 pt-lg-0 pt-5">
+         <h1 class="fw-bolder text-dark ">Forgotten Password ?</h1>
+         <p class="text-muted fw-bold h4">Enter your email to reset your password</p>
+      </div>
+      <!--end::Title-->
+      <!--begin::Form group-->
+      <div class="form-group mb-5">
+         <input class="form-control form-control-solid h-auto p-4 rounded-lg fs-5" type="email" placeholder="Email"
+            name="email" autocomplete="off" formControlName="email" [readonly]="isEmailSubmit">
+         <div class="fv-plugins-message-container" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+            <small class="text-danger" *ngIf="form.get('email')?.errors?.['required']">Email required</small>
+            <small class="text-danger" *ngIf="form.get('email')?.errors?.['email']">The email address format is not
+               valid.</small>
+         </div>
+         <div class="fv-plugins-message-container" *ngIf="message">
+            <small class="text-danger" *ngIf="message?.showErrorMessage">{{message?.showErrorMessage}}</small>
+            <small class="text-success" *ngIf="message?.successMessage">{{message?.successMessage}}</small>
+         </div>
+      </div>
+      <div *ngIf="isEmailSubmit">
+         <p class="text-muted fw-bold h4">Enter Otp sent on your Email</p>
+         <div class="align-items-center d-flex">
+            <!-- <ng-otp-input  [config]="{length:4,allowNumbersOnly:true}"></ng-otp-input> -->
+            <div class="otp-div me-4 border w-40px h-40px text-center">
+               <input type="text" class="form-control text-center border-0 w-100 fs-5 h-100" maxlength="1"
+                  oninput="this.value=this.value.replace(/[^0-9]/g,'');" #one (keyup)="OnChanges(one)" name="one" />
+            </div>
+            <div class="otp-div me-4 border w-40px  h-40px text-center">
+               <input type="text" class="form-control text-center border-0 w-100 fs-5 h-100" maxlength="1"
+                  oninput="this.value=this.value.replace(/[^0-9]/g,'');" #two (keyup)="OnChanges(two)" name="two" />
+            </div>
+            <div class="otp-div me-4 border w-40px  h-40px text-center">
+               <input type="text" class="form-control text-center border-0 fs-5 w-100 h-100" maxlength="1"
+                  oninput="this.value=this.value.replace(/[^0-9]/g,'');" #three (keyup)="OnChanges(three)"
+                  name="three" />
+            </div>
+            <div class="otp-div me-4 border w-40px  h-40px text-center">
+               <input type="text" class="form-control border-0 text-center fs-5 w-100 h-100" maxlength="1"
+                  oninput="this.value=this.value.replace(/[^0-9]/g,'');" #four (keyup)="OnChanges(four)" name="four" />
+            </div>
+         </div>
+         <div class="fv-plugins-message-container" *ngIf="otpMessage">
+            <small class="text-danger"  *ngIf="otpMessage?.showErrorMessage">{{otpMessage?.showErrorMessage}}</small>
+            <small class="text-success"  *ngIf="otpMessage?.successMessage">{{otpMessage?.successMessage}}</small>
+         </div>
+      </div>
+
+      <!--end::Form group-->
+      <!--begin::Form group-->
+      <div class="form-group d-flex flex-wrap pb-lg-0">
+         <button type="button" class="btn btn-primary fw-bolder fs-5 px-8 py-4 my-3 me-4"
+            (click)='isEmailSubmit?onSubmitOTP():onSubmitEmail()'>{{isEmailSubmit?'Verify':'Submit'}}</button>
+         <button type="button" class="btn btn-light-primary cancel-forget fw-bolder fs-5 px-8 py-4 my-3"
+            [routerLink]="['/users/login']">Cancel</button>
+      </div>
+      <!--end::Form group-->
+   </form>
+   <!--end::Form-->
+</div>
+<!--end::Forgot-->
+
+
+<notifier-container></notifier-container>

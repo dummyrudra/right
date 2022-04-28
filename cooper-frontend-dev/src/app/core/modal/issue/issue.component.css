@@ -1,0 +1,8 @@
+.dropdown-toggle::after {
+    display: none;
+  }
+  
+
+.form-control.ng-invalid.ng-touched{
+    border: 1px solid red !important;
+  }

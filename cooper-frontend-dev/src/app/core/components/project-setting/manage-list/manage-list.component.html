@@ -1,0 +1,166 @@
+<!--begin::Content-->
+<div id="kt_content">
+    <button class="accordion-button border-0 collapsed rounded btn nav-link py-4 px-5  d-md-none" type="button"
+        data-bs-toggle="collapse" data-bs-target="#manage-people" aria-expanded="true" aria-controls="manage-people">
+        <span class="d-flex flex-column align-items-start">
+            <span class="fs-5 fw-normal d-flex align-items-center">
+                <span class="svg-icon  me-4 svg-icon-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                        height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <polygon points="0 0 24 0 24 24 0 24" />
+                            <path
+                                d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+                                fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                            <path
+                                d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+                                fill="#000000" fill-rule="nonzero" />
+                        </g>
+                    </svg>
+                </span>
+                Manage List
+            </span>
+        </span>
+    </button>
+    <div class="card accordion-body accordion-collapse w-100 p-0 m-0 collapse rounded-0"
+        data-bs-parent="#accordion-left-tabs " aria-labelledby="manage-people" id="manage-people">
+        <div class="card p-md-9 p-6 mt-5">
+            <div class="card-header border-0 px-0">
+                <div class="d-sm-flex align-items-center w-100 justify-content-between">
+                    <h2 class="text-dark m-0 ">
+                        Manage List
+                    </h2>
+                    <div class="ms-auto ant-btn-sec">
+                        <div data-kt-search-element="wrapper">
+                            <button nz-button (click)="openModal()" class="bg-secondary border-0 w-35px h-35px ">
+                                <i class="bi bi-plus fs-1 fw-bolder"></i></button>
+
+                        </div>
+                        <!--end::Wrapper-->
+                    </div>
+                </div>
+            </div>
+            <nz-spin nzTip="Loading..." nzSpinning="false"></nz-spin>
+            <div class="card-body p-0" cdkDropListGroup cdkScrollable>
+                <div class="p-0 mt-5" *ngFor="let item of list;index as i">
+                    <!--begin::Accordion-->
+                    <div class="bg-light rounded" id="sprint_{{i}}">
+                        <!--begin::Item-->
+                        <div class="mb-3">
+                            <!--begin::Header-->
+                            <div class="dragOver" id="{{item._id}}">
+                                <div class="d-sm-flex w-100 align-items-center px-4 task-list-title"
+                                    *ngIf="!inputField[i]">
+                                    <div class="sprint-action-detail">
+                                        <div class="py-3  d-flex align-items-center text-capitalize">
+                                            {{item?.listName}}
+                                        </div>
+
+                                    </div>
+                                    <div
+                                        class="cursor-pointer ms-auto py-3 w-100px d-flex sprint-action justify-content-sm-end align-items-center">
+                                        <div class="me-3">
+                                            <span class="svg-icon svg-icon-primary" (click)="changeField(i)">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                    height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <rect x="0" y="0" width="24" height="24" />
+                                                        <path
+                                                            d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z"
+                                                            fill="#000000" fill-rule="nonzero"
+                                                            transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) " />
+                                                        <rect fill="#000000" opacity="0.3" x="5" y="20" width="15"
+                                                            height="2" rx="1" />
+                                                    </g>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <div class="ms-3" (click)="showConfirm(item)">
+                                            <span class="svg-icon svg-icon-danger">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                    height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <rect x="0" y="0" width="24" height="24" />
+                                                        <path
+                                                            d="M6,8 L18,8 L17.106535,19.6150447 C17.04642,20.3965405 16.3947578,21 15.6109533,21 L8.38904671,21 C7.60524225,21 6.95358004,20.3965405 6.89346498,19.6150447 L6,8 Z M8,10 L8.45438229,14.0894406 L15.5517885,14.0339036 L16,10 L8,10 Z"
+                                                            fill="#000000" fill-rule="nonzero" />
+                                                        <path
+                                                            d="M14,4.5 L14,3.5 C14,3.22385763 13.7761424,3 13.5,3 L10.5,3 C10.2238576,3 10,3.22385763 10,3.5 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z"
+                                                            fill="#000000" opacity="0.3" />
+                                                    </g>
+                                                </svg></span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="d-flex bg-white align-items-center rounded px-4 border edit-list-title"
+                                    *ngIf="inputField[i]">
+                                    <input type="text" class="form-control bg-white px-0 border-0"
+                                        [value]="item?.listName" #listName>
+                                    <div class="icons-profile bg-body-rounded ms-auto w-45px d-flex">
+                                        <i class="bi bi-check d-inline-block fs-1 cursor-pointer fw-bold text-success"
+                                            (click)="changeListName(listName,i)"></i>
+                                        <i class="bi bi-x d-inline-block fs-1 cursor-pointer fw-bold text-danger"
+                                            (click)="changeField(i)"></i>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--end::Header-->
+                            <!--begin::Body-->
+
+                            <!--end::Body-->
+                        </div>
+                        <!--end::Item-->
+                    </div>
+                    <!--end::Accordion-->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--end::Content-->
+
+
+<!-- delete task modal -->
+<ng-template #deleteTaskModal let-modal>
+    <div class="modal-content">
+        <div class="modal-header py-3">
+            <h4 class="modal-title mb-0">Delete </h4>
+            <!--begin::Close-->
+            <div class="btn btn-icon btn-sm btn-light">
+                <span class="svg-icon svg-icon-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                        height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(4.000000, 4.000000)"
+                                fill="#000000">
+                                <rect x="0" y="7" width="16" height="2" rx="1"></rect>
+                                <rect opacity="0.3"
+                                    transform="translate(8.000000, 8.000000) rotate(-270.000000) translate(-8.000000, -8.000000) "
+                                    x="0" y="7" width="16" height="2" rx="1"></rect>
+                            </g>
+                        </g>
+                    </svg>
+                </span>
+            </div>
+            <!--end::Close-->
+        </div>
+    </div>
+</ng-template>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Add List" nzOkText="Save" nzCancelText="cancel"
+    (nzOnCancel)="handleListCancel()" (nzOnOk)="handleListOk()" [nzOkDisabled]="!Form.valid"
+    [nzOkLoading]="isListOkLoading">
+    <div *nzModalContent class="nz-custom-modal">
+        <form [formGroup]="Form">
+            <label class="required fw-bold fs-6 p-0 w-100  mb-2">ListName</label>
+            <input type="text" class="form-control" placeholder="Enter Listname" formControlName="listName" />
+        </form>
+    </div>
+</nz-modal>

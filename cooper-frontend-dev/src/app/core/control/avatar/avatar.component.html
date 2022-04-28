@@ -1,0 +1,13 @@
+<div *ngIf="avatarUrl!=undefined"
+(click)="taskFilter(user?.member?._id)"
+     [ngClass]="['avatar-container', className]"
+     [ngStyle]="style">
+</div>
+
+<div *ngIf="default!=undefined"
+class="fullName"
+(click)="taskFilter(user?.member?._id)"
+     [ngClass]="['avatar-container', className]"
+     [ngStyle]="style1">
+     <span class="text-center" >{{default | namePipe:default}}</span>
+</div>

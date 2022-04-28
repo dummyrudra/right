@@ -1,0 +1,6 @@
+.tooltip.tooltip-top,
+.tooltip.tooltip-bottom,
+.tooltip.tooltip-left,
+.tooltip.tooltip-right {
+  z-index: 100000;
+}
